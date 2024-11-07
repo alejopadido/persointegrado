@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="backgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorMenuAdministrador">
+   <children>
+      <ImageView fitHeight="67.0" fitWidth="36.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/logoBlanco.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="59.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PersoIntegrado" />
+      <Text fill="WHITE" layoutX="63.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consultar Rutas">
+         <font>
+            <Font size="22.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="334.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consultar una ruta">
+         <font>
+            <Font size="22.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="59.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pagar pasaje">
+         <font>
+            <Font size="29.0" />
+         </font></Text>
+      <ImageView fx:id="imgConsultarRutas" fitHeight="120.0" fitWidth="124.0" layoutX="79.0" layoutY="87.0" onMouseClicked="#onMouseClickedConsultarRutas" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/ConsultarRutas.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgConsultarUnaRuta" fitHeight="120.0" fitWidth="200.0" layoutX="348.0" layoutY="87.0" onMouseClicked="#onMouseClickedConsultarUnaRuta" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/ConsultarUnaRuta.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgPagarPasaje" fitHeight="128.0" fitWidth="138.0" layoutX="66.0" layoutY="310.0" onMouseClicked="#onMouseClickedPagarPasaje" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/PagarPasaje.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgCrearUnaRuta" fitHeight="150.0" fitWidth="200.0" layoutX="325.0" layoutY="325.0" onMouseClicked="#onMouseClickedCrearRuta" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/CrearRuta.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="333.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crear una ruta">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="imgCrearContratoConEmpresa" fitHeight="120.0" fitWidth="200.0" layoutX="615.0" layoutY="327.0" onMouseClicked="#onMouseClickedCrearContratoConEmpresa" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/CrearContrato.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="610.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pagar nomina">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="568.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crear contrato con empresa" textAlignment="CENTER" wrappingWidth="236.3046875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="818.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reporte a proveedores" textAlignment="CENTER" wrappingWidth="138.0">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="imgPagarNomina" fitHeight="120.0" fitWidth="200.0" layoutX="609.0" layoutY="94.0" onMouseClicked="#onMouseClickedPagarNomina" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/PagarNomina.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgReporteAProveedores" fitHeight="120.0" fitWidth="200.0" layoutX="830.0" layoutY="214.0" onMouseClicked="#onMouseClickedReporteAProveedores" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/ReporteAProveedores.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
