@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="backgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorLogin">
+   <children>
+      <ImageView fitHeight="179.0" fitWidth="210.0" layoutX="411.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/logoBlanco.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="240.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PersoIntegrado">
+         <font>
+            <Font size="77.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnAdministrador" layoutX="112.0" layoutY="331.0" mnemonicParsing="false" onAction="#onActionAdministrador" prefHeight="149.0" prefWidth="256.0" text="Administrador">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnUsuario" layoutX="632.0" layoutY="331.0" mnemonicParsing="false" onAction="#onActionUsuario" prefHeight="149.0" prefWidth="256.0" text="Usuario">
+         <font>
+            <Font size="52.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

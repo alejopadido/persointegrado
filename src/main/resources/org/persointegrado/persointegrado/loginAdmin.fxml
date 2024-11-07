@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="backgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorLogin">
+   <children>
+      <ImageView fitHeight="198.0" fitWidth="309.0" layoutX="184.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/logoBlanco.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="31.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido Administrador">
+         <font>
+            <Font size="44.0" />
+         </font></Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" layoutX="557.0" layoutY="1.0" stroke="#e5f1ff" strokeType="INSIDE" strokeWidth="10.0" width="443.0" />
+      <Text layoutX="594.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero de cedula">
+         <font>
+            <Font size="34.0" />
+         </font></Text>
+      <Text layoutX="594.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
+         <font>
+            <Font size="34.0" />
+         </font></Text>
+      <TextField fx:id="tfNumeroDeCedula" layoutX="594.0" layoutY="153.0" onAction="#onActionNumeroDeCedula" prefHeight="45.0" prefWidth="278.0">
+         <font>
+            <Font size="23.0" />
+         </font></TextField>
+      <TextField fx:id="tfContrasena" layoutX="594.0" layoutY="316.0" onAction="#onActionContrasena">
+         <font>
+            <Font size="23.0" />
+         </font></TextField>
+      <Button fx:id="btnIngresar" layoutX="691.0" layoutY="425.0" mnemonicParsing="false" onAction="#onActionIngresar" text="Ingresar">
+         <font>
+            <Font size="37.0" />
+         </font></Button>
+      <Text fx:id="tError" layoutX="603.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+   </children>
+</AnchorPane>
