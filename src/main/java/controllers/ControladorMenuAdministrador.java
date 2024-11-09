@@ -2,7 +2,16 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import org.persointegrado.persointegrado.MainApplication;
+
+import java.io.IOException;
 
 public class ControladorMenuAdministrador {
 
@@ -28,37 +37,45 @@ public class ControladorMenuAdministrador {
     private ImageView imgCrearContratoConEmpresa;
 
     @FXML
-    void onMouseClickedConsultarRutas(ActionEvent event) {
+    void onMouseClickedConsultarRutas(MouseEvent event) {
 
     }
 
     @FXML
-    void onMouseClickedConsultarUnaRuta(ActionEvent event) {
+    void onMouseClickedConsultarUnaRuta(MouseEvent event) {
 
     }
 
     @FXML
-    void onMouseClickedPagarPasaje(ActionEvent event) {
+    void onMouseClickedPagarPasaje(MouseEvent event) {
 
     }
 
     @FXML
-    void onMouseClickedCrearRuta(ActionEvent event) {
+    void onMouseClickedCrearRuta(MouseEvent event) {
 
     }
 
     @FXML
-    void onMouseClickedCrearContratoConEmpresa(ActionEvent event) {
+    void onMouseClickedCrearContratoConEmpresa(MouseEvent event) {
+        try{
+            Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("crearContrato.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(fxmlLoader);
+            stage.setScene(scene);
+            stage.show();
+        }catch(IOException e){
+            e.printStackTrace();
+        };
+    }
+
+    @FXML
+    void onMouseClickedPagarNomina(MouseEvent event) {
 
     }
 
     @FXML
-    void onMouseClickedPagarNomina(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onMouseClickedReporteAProveedores(ActionEvent event) {
+    void onMouseClickedReporteAProveedores(MouseEvent event) {
 
     }
 

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.persointegrado.persointegrado.MainApplication;
 import java.io.IOException;
@@ -16,8 +17,9 @@ public class ControladorLogin {
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
+    @FXML
+    private Text tError;
     @FXML
     private Button btnUsuario;
 
@@ -69,7 +71,7 @@ public class ControladorLogin {
     }
 
     public void onActionIngresar(ActionEvent actionEvent) {
-        if(tfNumeroDeCedula.getText().equalsIgnoreCase("1034398550") && tfContrasena.getText().equalsIgnoreCase("javeriana")){
+        if(tfNumeroDeCedula.getText().equalsIgnoreCase("1") && tfContrasena.getText().equalsIgnoreCase("j")){
             try{
                 Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("menuAdministrador.fxml"));
                 stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -80,7 +82,7 @@ public class ControladorLogin {
                 e.printStackTrace();
             };
         }else{
-            System.out.println("Datos Incorrectos valido");
+            tError.setText("Datos invalidos");
         }
 
     }

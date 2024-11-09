@@ -39,5 +39,6 @@
          <font>
             <Font size="37.0" />
          </font></Button>
+      <Text fx:id="tError" layoutX="603.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

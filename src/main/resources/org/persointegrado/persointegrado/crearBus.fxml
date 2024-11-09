@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="backgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorCrearContrato">
+   <children>
+      <ImageView fitHeight="69.0" fitWidth="55.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/logoBlanco.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="89.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PersoIntegrado" />
+      <Text fill="WHITE" layoutX="34.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Placa" wrappingWidth="132.7138671875">
+         <font>
+            <Font name="System Italic" size="51.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfPlaca" layoutX="34.0" layoutY="292.0" prefHeight="78.0" prefWidth="387.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="567.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modelo" wrappingWidth="386.7138671875">
+         <font>
+            <Font name="System Italic" size="51.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfModelo" layoutX="567.0" layoutY="292.0" prefHeight="78.0" prefWidth="387.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btnSiguienteBus" layoutX="743.0" layoutY="508.0" mnemonicParsing="false" onAction="#onActionSiguienteBus" prefHeight="40.0" prefWidth="180.0" text="Siguiente bus" />
+      <Text fx:id="tErrorBus" fill="WHITE" layoutX="34.0" layoutY="534.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="tBusActual" fill="WHITE" layoutX="743.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bus actual numero: " />
+   </children>
+</AnchorPane>
