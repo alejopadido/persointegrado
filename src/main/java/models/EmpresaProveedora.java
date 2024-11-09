@@ -1,11 +1,16 @@
 package models;
 
-public class EmpresaProveedora {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmpresaProveedora implements Serializable {
     private String nombre;
     private  int nit;
     private ContratoProveedor contrato;
+    private List<Bus> buses;
 
-    public EmpresaProveedora(String nombre, int nit, int contrato) throws EmpresaProveedoraException, ContratoProveedorException {
+    public EmpresaProveedora(String nombre, int nit, String contrato) throws EmpresaProveedoraException, ContratoProveedorException {
         if(nombre == null){
             throw new EmpresaProveedoraException("Nombre del empresa nulo");
         }if(nit == 0){
@@ -14,8 +19,37 @@ public class EmpresaProveedora {
             this.nombre = nombre;
             this.nit = nit;
             this.contrato = new ContratoProveedor(contrato);
+            buses = new ArrayList<Bus>();
         }
 
+    }
+
+    public void añadirBus(int id, String placa, String modelo) throws EmpresaProveedoraException, BusException {
+        if(id<1 || placa.equalsIgnoreCase("") || modelo.equalsIgnoreCase("")) {
+            throw new EmpresaProveedoraException("Los campos no pueden estar vacios");
+        }else if(revisarPlacaDuplicad(placa)){
+            throw new BusException("El placa ya existe");
+        }else{
+            buses.add(new Bus(id, placa, this.nombre, modelo));
+        }
+    }
+
+    public boolean revisarPlacaDuplicad(String placa){
+        boolean estado = false;
+        for(Bus b: buses){
+            if(placa.equalsIgnoreCase(b.getPlaca())){
+                estado = true;
+            }
+        }
+        return estado;
+    }
+
+    public List<Bus> getBuses() {
+        return buses;
+    }
+
+    public int getBusesSize(){
+        return buses.size();
     }
 
     public int getNit(){
@@ -48,6 +82,7 @@ public class EmpresaProveedora {
                 "nombre='" + nombre + '\'' +
                 ", nit=" + nit +
                 ", contrato=" + contrato +
+                ", Buses=" + buses +
                 '}';
     }
 }
