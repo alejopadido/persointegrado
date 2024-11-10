@@ -53,7 +53,15 @@ public class ControladorMenuAdministrador {
 
     @FXML
     void onMouseClickedCrearRuta(MouseEvent event) {
-
+        try{
+            Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("crearRuta.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(fxmlLoader);
+            stage.setScene(scene);
+            stage.show();
+        }catch(IOException e){
+            e.printStackTrace();
+        };
     }
 
     @FXML

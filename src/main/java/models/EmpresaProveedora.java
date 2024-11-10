@@ -46,29 +46,29 @@ public class EmpresaProveedora implements Serializable {
         return estado;
     }
 
-    public int verificarValidez(LocalTime inicio, LocalTime fin, int busesDisponibles){
-        int ocu = 0;
+    public int verificarValidez(LocalTime inicio, LocalTime fin) {
+        int contador = 0;
         for(Bus b: buses){
-            if(b != null){
-                if(b.verificarValidez(inicio,fin,busesDisponibles)){
-                    ocu++;
-                }
+            if(b.verificarValidez(inicio, fin)) {
+                contador++;
             }
         }
-        return ocu;
+        return contador;
+
     }
 
-    public List<Bus> busesDisponibles(LocalTime inicio, LocalTime fin, int busesDisponibles, String conductor){
+
+    public List<Bus> busesDisponibles(LocalTime inicio, LocalTime fin, String conductor) {
         List<Bus> ls = new ArrayList<>();
-        for(Bus b: buses){
-            if(b != null){
-                if(b.busesDisponibles(inicio,fin,busesDisponibles, conductor)){
-                    ls.add(b);
-                }
+        for (Bus b : buses) {
+            if (b != null && b.busesDisponibles(inicio, fin, conductor)) {
+                ls.add(b);
             }
         }
         return ls;
     }
+
+
 
     public List<Bus> getBuses() {
         return buses;

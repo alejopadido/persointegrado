@@ -28,34 +28,29 @@ public class Bus implements Serializable {
 
     }
 
-    public boolean verificarValidez(LocalTime inicio, LocalTime fin, int busesDisponibles){
-        boolean posible = true;
-        for(Turno t: turnos){
-            if(fin.isBefore(t.getHoraFin()) && inicio.isAfter(t.getHoraInicio())){
-                posible = true;
-            }else{
-                posible = false;
-                return posible;
+    public boolean verificarValidez(LocalTime inicio, LocalTime fin) {
+        for (Turno t : turnos) {
+            if(t != null){
+                if (!(fin.isBefore(t.getHoraInicio()) || inicio.isAfter(t.getHoraFin()))) {
+                    return false; // Hay un solapamiento
+                }
             }
         }
-        return posible;
+        return true; // No hay solapamientos
     }
 
-    public boolean busesDisponibles(LocalTime inicio, LocalTime fin, int busesDisponibles, String conductor){
-        boolean posible = true;
-        for(Turno t: turnos){
-            if(fin.isBefore(t.getHoraFin()) && inicio.isAfter(t.getHoraInicio())){
-                posible = true;
-            }else{
-                posible = false;
-                return posible;
-            }
+
+
+    public boolean busesDisponibles(LocalTime inicio, LocalTime fin, String conductor) {
+        if (verificarValidez(inicio, fin)) {
+            turnos.add(new Turno(inicio, fin, conductor)); // Añadir el nuevo turno si es válido
+            return true;
         }
-        if(posible){
-            turnos.add(new Turno(inicio, fin, conductor));
-        }
-        return posible;
+        return false;
     }
+
+
+
 
     public String getPlaca(){
         return placa;

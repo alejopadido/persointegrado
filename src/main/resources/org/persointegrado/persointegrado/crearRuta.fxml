@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="backgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorCrearRuta">
+   <children>
+      <ImageView fitHeight="69.0" fitWidth="55.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/logoBlanco.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="89.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PersoIntegrado" />
+      <Text fill="WHITE" layoutX="29.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="132.7138671875">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfNombre" layoutX="29.0" layoutY="161.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="241.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero" wrappingWidth="90.7138671875">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnAñadirRuta" layoutX="743.0" layoutY="508.0" mnemonicParsing="false" onAction="#onActionAñadirRuta" prefHeight="40.0" prefWidth="180.0" text="Añadir ruta" />
+      <Text fx:id="tErrorBus" fill="WHITE" layoutX="34.0" layoutY="534.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <TextField fx:id="tfNumero" layoutX="241.0" layoutY="161.0" prefHeight="37.0" prefWidth="188.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <CheckBox fx:id="cbCiclico" layoutX="472.0" layoutY="157.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="161.0" text="¿Es ciclica?" textFill="WHITE">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </CheckBox>
+      <TextField fx:id="tfBusesDisponibles" layoutX="649.0" layoutY="159.0" prefHeight="37.0" prefWidth="188.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="649.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buses disponibles" wrappingWidth="180.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfHoraInicioRuta" layoutX="29.0" layoutY="302.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="29.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora de inicio de la ruta" wrappingWidth="180.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="245.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minuto de inicio de la ruta" wrappingWidth="180.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfMinutoInicioRuta" layoutX="240.0" layoutY="302.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfMinutoFinRuta" layoutX="243.0" layoutY="443.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="240.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minuto de fin de la ruta" wrappingWidth="180.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="29.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora de fin de la ruta" wrappingWidth="180.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfHoraFinRuta" layoutX="32.0" layoutY="443.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfHoraFinTurno" layoutX="475.0" layoutY="443.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="472.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora de fin del turno" wrappingWidth="180.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="683.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minuto de fin del turno" wrappingWidth="180.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfMinutoFinTurno" layoutX="686.0" layoutY="443.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfMinutoInicioTurno" layoutX="683.0" layoutY="302.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="688.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minuto de inicio del turno" wrappingWidth="180.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="472.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora de inicio del turno" wrappingWidth="180.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfHoraInicioTurno" layoutX="472.0" layoutY="302.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfNombreConductor" layoutX="32.0" layoutY="539.0" prefHeight="37.0" prefWidth="260.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="28.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre conductor" wrappingWidth="188.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="343.0" layoutY="526.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero de paraderos" wrappingWidth="290.0">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfNumeroParaderos" layoutX="339.0" layoutY="539.0" prefHeight="37.0" prefWidth="231.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

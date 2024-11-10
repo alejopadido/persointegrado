@@ -1,10 +1,10 @@
 package models;
 
+import utils.util;
+
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Ruta implements Serializable {
@@ -31,5 +31,41 @@ public class Ruta implements Serializable {
         paraderos = new ArrayList<Paradero>();
     }
 
+    public void añadirBus(Bus b){
+        buses.add(b);
 
+        for (Bus bus : buses) {
+            System.out.println(bus.getPlaca());
+        }
+    }
+
+    public void añadirParadero(String nombreParadero, String direccion, LocalTime llegada){
+        paraderos.add(new Paradero(nombreParadero,direccion, llegada));
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "{nombre: " + nombre +
+                "numero de ruta: " + numRuta +
+                "ciclico: " + ciclico +
+                "hora de inicio: " + horaInicio +
+                "hora de finalizacion: " + horaFin +
+                "buses disponibles:" + busesDisponibles +
+                " y estos son: " + buses +
+                " y las paradas son: " + paraderos +
+                "}\n";
+
+    }
+
+    public LocalTime getInicio() {
+        return horaInicio;
+    }
+
+    public LocalTime getFin() {
+        return horaFin;
+    }
 }
