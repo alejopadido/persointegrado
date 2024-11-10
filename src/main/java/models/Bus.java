@@ -1,6 +1,8 @@
 package models;
 
 import java.io.Serializable;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Bus implements Serializable {
@@ -10,7 +12,7 @@ public class Bus implements Serializable {
     private String empresaProveedora;
     private String modelo;
     private boolean estado;
-
+    List<Turno> turnos;
 
     public Bus(int id, String placa, String empresaProveedora, String modelo) throws BusException{
         if(id<1 || placa.equalsIgnoreCase("") || empresaProveedora.equalsIgnoreCase("") || modelo.equalsIgnoreCase("")) {
@@ -21,8 +23,38 @@ public class Bus implements Serializable {
             this.empresaProveedora = empresaProveedora;
             this.modelo = modelo;
             this.estado = false;
+            turnos = new ArrayList<Turno>();
         }
 
+    }
+
+    public boolean verificarValidez(LocalTime inicio, LocalTime fin, int busesDisponibles){
+        boolean posible = true;
+        for(Turno t: turnos){
+            if(fin.isBefore(t.getHoraFin()) && inicio.isAfter(t.getHoraInicio())){
+                posible = true;
+            }else{
+                posible = false;
+                return posible;
+            }
+        }
+        return posible;
+    }
+
+    public boolean busesDisponibles(LocalTime inicio, LocalTime fin, int busesDisponibles, String conductor){
+        boolean posible = true;
+        for(Turno t: turnos){
+            if(fin.isBefore(t.getHoraFin()) && inicio.isAfter(t.getHoraInicio())){
+                posible = true;
+            }else{
+                posible = false;
+                return posible;
+            }
+        }
+        if(posible){
+            turnos.add(new Turno(inicio, fin, conductor));
+        }
+        return posible;
     }
 
     public String getPlaca(){
