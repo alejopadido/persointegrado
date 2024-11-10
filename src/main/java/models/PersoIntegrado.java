@@ -16,11 +16,11 @@ public class PersoIntegrado implements Serializable {
         empresas = new ArrayList<EmpresaProveedora>();
     }
 
-    public void crearEmpresa(String nombre, int nit, int contrato) throws PersoIntegradoException, EmpresaProveedoraException, ContratoProveedorException {
+    public void crearEmpresa(String nombre, int nit, String contrato) throws PersoIntegradoException, EmpresaProveedoraException, ContratoProveedorException {
         boolean flag = true;
         for(EmpresaProveedora e: empresas){
             if(e != null){
-                if(e.getNit() == nit || e.getNombre().equalsIgnoreCase(nombre) || e.getContrato().contrato == contrato){
+                if(e.getNit() == nit || e.getNombre().equalsIgnoreCase(nombre) || e.getContrato().getContrato() == contrato){
                     System.out.println("Se ha cambiado la bandera a falso");
                     flag = false;
                 }
@@ -29,6 +29,31 @@ public class PersoIntegrado implements Serializable {
         if(flag){
             empresas.add(new EmpresaProveedora(nombre, nit, contrato));
         }
+    }
+
+    public void añadirBus(String nombreEmpresa,String placa, String modelo) throws BusException, EmpresaProveedoraException {
+        System.out.println("El nombre de la empresa es: "+ nombreEmpresa);
+        for(EmpresaProveedora e: empresas){
+            if(e != null){
+                if(e.getNombre().equalsIgnoreCase(nombreEmpresa)){
+                    e.añadirBus(idNuevoBus(),placa,modelo);
+                    System.out.println("Se encontro y añadio");
+                }
+            }
+        }
+        imprimirEmpresas();
+    }
+
+    public int idNuevoBus(){
+        int x = 0;{
+            for(EmpresaProveedora e: empresas){
+                if(e != null){
+                    x += e.getBusesSize();
+                }
+            }
+        }
+        x++;
+        return x;
     }
 
     public void imprimirEmpresas(){

@@ -1,14 +1,20 @@
 package models;
 
-public class ContratoProveedor {
-    int contrato;
+import java.io.Serializable;
 
-    public ContratoProveedor(int contrato) throws ContratoProveedorException{
-        if(contrato<=0){
+public class ContratoProveedor implements Serializable {
+    private String contrato;
+
+    public ContratoProveedor(String contrato) throws ContratoProveedorException{
+        if(contrato.equalsIgnoreCase("")){
             throw new ContratoProveedorException("Contrato invalido");
         }else{
             this.contrato = contrato;
         }
+    }
+
+    String getContrato() {
+        return contrato;
     }
 
     @Override

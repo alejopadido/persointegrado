@@ -10,11 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import models.ContratoProveedorException;
-import models.EmpresaProveedoraException;
-import models.PersoIntegradoException;
+import models.*;
 import org.persointegrado.persointegrado.MainApplication;
-import models.PersoIntegrado;
 
 
 import java.io.IOException;
@@ -26,6 +23,8 @@ public class ControladorCrearContrato {
 
     private  PersoIntegrado persoIntegrado;
     private int contadorDeBuses = 0;
+    private int max;
+    private String nombre;
     private Stage stage;
     private Scene scene;
 
@@ -39,6 +38,7 @@ public class ControladorCrearContrato {
 
     @FXML
     private Text tErrorContrato;
+
 
     @FXML
     private TextField tfNit;
@@ -67,17 +67,39 @@ public class ControladorCrearContrato {
     @FXML
     private Text tBusActual;
     @FXML
-    void onActionSiguienteBus(ActionEvent event) {
-
+    void onActionSiguienteBus(ActionEvent event) throws BusException {
+        try{
+            tBusActual.setText(String.valueOf(contadorDeBuses));
+            if(contadorDeBuses<=max){
+                persoIntegrado.añadirBus(persoIntegrado.getEmpresas().get(persoIntegrado.getEmpresas().size()-1).getNombre(), tfPlaca.getText().trim(), tfModelo.getText().trim());
+                System.out.println("Se ha creado con exito la empresa");
+                persoIntegrado.imprimirEmpresas();
+                Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("crearBus.fxml"));
+                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(fxmlLoader);
+                stage.setScene(scene);
+                stage.show();
+            }else{
+                System.out.println("Se ha creado con exito la empresa");
+                persoIntegrado.imprimirEmpresas();
+                Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("menuAdministrador.fxml"));
+                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(fxmlLoader);
+                stage.setScene(scene);
+                stage.show();
+            }
+        }catch(BusException | IOException | EmpresaProveedoraException e){
+            e.getCause();
+        }
+        contadorDeBuses++;
     }
     @FXML
     void onActionIngresarBuses(ActionEvent event) {
         try{
-            persoIntegrado.crearEmpresa(tfNombreDeLaEmpresa.getText(),Integer.parseInt(tfNit.getText().trim()),Integer.parseInt(tfNumeroContrato.getText().trim()));
-
-            System.out.println("Se ha creado con exito la empresa");
+            max = Integer.parseInt(tfNumeroDeBusesAOfrecer.getText().trim());
+            persoIntegrado.crearEmpresa(tfNombreDeLaEmpresa.getText(),Integer.parseInt(tfNit.getText().trim()),tfNumeroContrato.getText());
             persoIntegrado.imprimirEmpresas();
-            Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("menuAdministrador.fxml"));
+            Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("crearBus.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(fxmlLoader);
             stage.setScene(scene);
