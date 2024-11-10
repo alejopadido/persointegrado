@@ -1,8 +1,10 @@
 package models;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class EmpresaProveedora implements Serializable {
     private String nombre;
@@ -42,6 +44,30 @@ public class EmpresaProveedora implements Serializable {
             }
         }
         return estado;
+    }
+
+    public int verificarValidez(LocalTime inicio, LocalTime fin, int busesDisponibles){
+        int ocu = 0;
+        for(Bus b: buses){
+            if(b != null){
+                if(b.verificarValidez(inicio,fin,busesDisponibles)){
+                    ocu++;
+                }
+            }
+        }
+        return ocu;
+    }
+
+    public List<Bus> busesDisponibles(LocalTime inicio, LocalTime fin, int busesDisponibles, String conductor){
+        List<Bus> ls = new ArrayList<>();
+        for(Bus b: buses){
+            if(b != null){
+                if(b.busesDisponibles(inicio,fin,busesDisponibles, conductor)){
+                    ls.add(b);
+                }
+            }
+        }
+        return ls;
     }
 
     public List<Bus> getBuses() {
@@ -85,4 +111,6 @@ public class EmpresaProveedora implements Serializable {
                 ", Buses=" + buses +
                 '}';
     }
+
+
 }

@@ -3,14 +3,15 @@ package models;
 import controllers.ControladorCrearContrato;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersoIntegrado implements Serializable {
     private static PersoIntegrado instance;
     List<EmpresaProveedora> empresas;
-    ControladorCrearContrato controladorCrearContrato;
-
+    List<Ruta> rutas;
 
     public PersoIntegrado() {
         empresas = new ArrayList<EmpresaProveedora>();
@@ -21,7 +22,6 @@ public class PersoIntegrado implements Serializable {
         for(EmpresaProveedora e: empresas){
             if(e != null){
                 if(e.getNit() == nit || e.getNombre().equalsIgnoreCase(nombre) || e.getContrato().getContrato() == contrato){
-                    System.out.println("Se ha cambiado la bandera a falso");
                     flag = false;
                 }
             }
@@ -32,16 +32,56 @@ public class PersoIntegrado implements Serializable {
     }
 
     public void añadirBus(String nombreEmpresa,String placa, String modelo) throws BusException, EmpresaProveedoraException {
-        System.out.println("El nombre de la empresa es: "+ nombreEmpresa);
         for(EmpresaProveedora e: empresas){
             if(e != null){
                 if(e.getNombre().equalsIgnoreCase(nombreEmpresa)){
                     e.añadirBus(idNuevoBus(),placa,modelo);
-                    System.out.println("Se encontro y añadio");
                 }
             }
         }
-        imprimirEmpresas();
+    }
+
+    public void crearRuta(String conductor, LocalTime inicio, LocalTime fin, int horaInicio, int horaFinal, int minutoInicio, int minutoFinal, String nombre, int numeroDeRuta, boolean ciclico, int busesDisponibles) throws PersoIntegradoException {
+        if(nombre.equalsIgnoreCase("") || numeroDeRuta<=0 || busesDisponibles<=0 ){
+            throw new PersoIntegradoException("No pueden existir nulos o menores a 0");
+        }else{
+            LocalTime inicioRuta = utils.util.integersToTimes(horaInicio,minutoInicio);
+            LocalTime finRuta = utils.util.integersToTimes(horaFinal,minutoFinal);
+
+            int x = verificarValidez(inicio,fin, busesDisponibles);
+            if(x >= numeroDeRuta){
+                List<List<Bus>> buses = busesDisponibles(inicio,fin,busesDisponibles,conductor);
+            }
+            rutas.add(new Ruta(inicioRuta,finRuta,nombre,numeroDeRuta,ciclico,busesDisponibles));
+
+
+        }
+    }
+
+    public int verificarValidez(LocalTime inicio, LocalTime fin, int busesDisponibles) throws PersoIntegradoException {
+        int c  = 0;
+        for(EmpresaProveedora e: empresas){
+            if(c >= busesDisponibles){
+                break;
+            }
+            if(e != null){
+                c += e.verificarValidez(inicio,fin,busesDisponibles);
+            }
+        }
+        return  c;
+    }
+
+    public List<List<Bus>> busesDisponibles(LocalTime inicio, LocalTime fin, int busesDisponibles, String conductor){
+        List<List<Bus>> ls = new ArrayList<>(){
+        };
+        for(EmpresaProveedora e: empresas){
+            ls.add(e.busesDisponibles(inicio,fin,busesDisponibles, conductor));
+        }
+        return ls;
+    }
+
+    public void añadirALaRuta(Bus b, String nombre ){
+
     }
 
     public int idNuevoBus(){
