@@ -23,8 +23,9 @@ public class Paradero implements Serializable {
 
     @Override
     public String toString() {
-        return "{nombre: " + nombre
-                + ", direccion: " + direccion
-                + ", horaDeLlegada: " + horaDeLlegada + "}";
+        return "Paradero: " + nombre + "\n" +
+                "Dirección: " + direccion + "\n" +
+                "Hora de Llegada: " + horaDeLlegada.getHora().toString() + "\n";
     }
+
 }
