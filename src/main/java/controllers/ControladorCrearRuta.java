@@ -24,7 +24,7 @@ public class ControladorCrearRuta {
     private  PersoIntegrado persoIntegrado;
     private Stage stage;
     private Scene scene;
-    private int conta = 1;
+    private int conta = 0;
     private int x;
     public ControladorCrearRuta() {
         this.persoIntegrado = PersoIntegrado.getInstance();
@@ -96,32 +96,39 @@ public class ControladorCrearRuta {
     @FXML
     void onActionAñadirParada(ActionEvent event) throws IOException {
         x = persoIntegrado.recibirMax();
+        System.out.println(x);
         String nomruta = persoIntegrado.getRutas().get(persoIntegrado.getRutas().size()-1).getNombre();
-        if(conta<x){
-            conta++;
+        try{
             LocalTime llegada = util.integersToTimes(Integer.parseInt(tfHoraLlegada.getText()),Integer.parseInt(tfMinutoLlegada.getText()));
             persoIntegrado.añadirParada(nomruta,tfNombreParadero.getText(),tfDireccionParadero.getText(),llegada);
+            System.out.println("Se ha guardado el paradero: " + (conta+1));
             PersoIntegrado.saveData();
-        }else{
-            persoIntegrado.imprimirRutas();
-            Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("menuAdministrador.fxml"));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(fxmlLoader);
-            stage.setScene(scene);
-            stage.show();
+            if(conta<x-1){
+                conta++;
+            }else{
+                persoIntegrado.imprimirRutas();
+                Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("menuAdministrador.fxml"));
+                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                scene = new Scene(fxmlLoader);
+                stage.setScene(scene);
+                stage.show();
+            }
+        } catch (NumberFormatException | IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @FXML
     void onActionAñadirRuta(ActionEvent event) throws Exception {
     try{
-        persoIntegrado.guardarNumeroMax(Integer.parseInt(tfNumeroParaderos.getText()));
+        x = Integer.parseInt(tfNumeroParaderos.getText().trim());
+        persoIntegrado.guardarNumeroMax(x);
         LocalTime inicioTurno = util.integersToTimes(Integer.parseInt(tfHoraInicioTurno.getText()), Integer.parseInt(tfMinutoInicioTurno.getText()));
         LocalTime finTurno = util.integersToTimes(Integer.parseInt(tfHoraFinTurno.getText()), Integer.parseInt(tfMinutoFinTurno.getText()));
         LocalTime inicioRuta = util.integersToTimes(Integer.parseInt(tfHoraInicioRuta.getText()), Integer.parseInt(tfMinutoInicioRuta.getText()));
         LocalTime finRuta = util.integersToTimes(Integer.parseInt(tfHoraFinRuta.getText()), Integer.parseInt(tfMinutoFinRuta.getText()));
         boolean state = cbCiclico.isSelected();
-        persoIntegrado.crearRuta(tfNombreConductor.getText(),inicioTurno,finTurno,inicioRuta,finRuta, tfNombre.getText(), Integer.parseInt(tfNumero.getText()), state, Integer.parseInt(tfBusesDisponibles.getText()));
+        persoIntegrado.crearRuta(tfNombreConductor.getText(),inicioTurno,finTurno,inicioRuta,finRuta, tfNombre.getText(), Integer.parseInt(tfNumero.getText().trim()), state, Integer.parseInt(tfBusesDisponibles.getText().trim()));
         PersoIntegrado.saveData();
         Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("añadirParaderos.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

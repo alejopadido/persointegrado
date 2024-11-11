@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ControladorCrearContrato {
 
     private  PersoIntegrado persoIntegrado;
@@ -71,7 +70,6 @@ public class ControladorCrearContrato {
         max = persoIntegrado.recibirMax();
         try{
             System.out.println(contadorDeBuses);
-            tBusActual.setText(String.valueOf(contadorDeBuses ));
             System.out.println("El numero maximo es: " + max);
             persoIntegrado.añadirBus(persoIntegrado.getEmpresas().get(persoIntegrado.getEmpresas().size()-1).getNombre(), tfPlaca.getText().trim(), tfModelo.getText().trim());
             PersoIntegrado.saveData();
