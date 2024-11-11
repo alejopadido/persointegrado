@@ -28,4 +28,11 @@ public class Paradero implements Serializable {
                 "Hora de Llegada: " + horaDeLlegada.getHora().toString() + "\n";
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
 }

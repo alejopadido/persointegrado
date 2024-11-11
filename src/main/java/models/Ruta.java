@@ -41,7 +41,11 @@ public class Ruta implements Serializable {
     }
 
     public void añadirParadero(String nombreParadero, String direccion, LocalTime llegada){
-        paraderos.add(new Paradero(nombreParadero,direccion, llegada));
+        // Obtener o crear el paradero en el ParaderoManager
+        Paradero paradero = PersoIntegrado.getInstance().getParaderoManager().obtenerParadero(nombreParadero, direccion, llegada);
+
+        // Añadir el paradero a la lista de paraderos de esta ruta
+        paraderos.add(paradero);
     }
 
     public String getNombre() {
@@ -77,17 +81,53 @@ public class Ruta implements Serializable {
         return "Pagos para la Ruta " + nombre + '\'' + numRuta +
                 "{ " + pagosXBus +" } \n";
     }
+
+    public boolean tieneParadero(String nombreParadero) {
+        return paraderos.stream().anyMatch(paradero -> paradero.getNombre().equalsIgnoreCase(nombreParadero));
+    }
+
+    public int contarParaderosEntre(String origen, String destino) {
+        int indiceOrigen = -1;
+        int indiceDestino = -1;
+
+        for (int i = 0; i < paraderos.size(); i++) {
+            if (paraderos.get(i).getNombre().equalsIgnoreCase(origen)) {
+                indiceOrigen = i;
+            } else if (paraderos.get(i).getNombre().equalsIgnoreCase(destino)) {
+                indiceDestino = i;
+            }
+
+            if (indiceOrigen != -1 && indiceDestino != -1) {
+                break;
+            }
+        }
+
+        if (indiceOrigen == -1 || indiceDestino == -1) {
+            return Integer.MAX_VALUE; // No existe un camino directo
+        }
+
+        return Math.abs(indiceDestino - indiceOrigen) - 1; // Retorna la cantidad de paraderos entre ambos
+    }
+
     @Override
     public String toString() {
-        return "{nombre: " + nombre +
-                "numero de ruta: " + numRuta +
-                "ciclico: " + ciclico +
-                "hora de inicio: " + horaInicio +
-                "hora de finalizacion: " + horaFin +
-                "buses disponibles:" + busesDisponibles +
-                " y estos son: " + buses +
-                " y las paradas son: " + paraderos +
-                "}\n";
-
+        StringBuilder sb = new StringBuilder();
+        sb.append("Ruta: \n");
+        sb.append("  Nombre: ").append(nombre).append("\n");
+        sb.append("  Número de Ruta: ").append(numRuta).append("\n");
+        sb.append("  Ciclico: ").append(ciclico ? "Sí" : "No").append("\n");
+        sb.append("  Hora de Inicio: ").append(horaInicio).append("\n");
+        sb.append("  Hora de Finalización: ").append(horaFin).append("\n");
+        sb.append("  Buses Disponibles: ").append(busesDisponibles).append("\n");
+        sb.append("  Buses: \n");
+        for (Bus bus : buses) {
+            sb.append("    - ").append(bus).append("\n");
+        }
+        sb.append("  Paradas: \n");
+        for (Paradero paradero : paraderos) {
+            sb.append("    - ").append(paradero).append("\n");
+        }
+        return sb.toString();
     }
+
 }

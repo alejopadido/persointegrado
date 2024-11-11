@@ -24,8 +24,22 @@ public class ControladorMenuUsuario {
 
     @FXML
     void onMouseClickedConsultarRutas(MouseEvent event) {
+        try {
+            // Cargar la nueva pantalla "ConsultarRutasOptimas.fxml"
+            Parent consultarRutasOptimasParent = FXMLLoader.load(getClass().getResource("/org/persointegrado/persointegrado/ConsultarRutasOptimas.fxml"));
 
+            // Obtener el Stage actual desde el evento
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Crear una nueva escena y configurarla en el Stage
+            Scene scene = new Scene(consultarRutasOptimasParent);
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @FXML
     void onMouseClickedConsultarUnaRuta(MouseEvent event) {
