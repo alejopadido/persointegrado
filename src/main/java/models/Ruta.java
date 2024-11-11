@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ruta implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String nombre;
     private int numRuta;
@@ -56,7 +57,9 @@ public class Ruta implements Serializable {
         return horaFin;
     }
 
-
+    public List<Paradero> getParaderos() {
+        return paraderos;
+    }
 
     /** PagosXRuta:
      * Descripcion: Genera un resumen de los pagos realizados por los autobuses en una ruta específica.

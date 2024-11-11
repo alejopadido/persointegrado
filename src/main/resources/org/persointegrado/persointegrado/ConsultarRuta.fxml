@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane fx:controller="controllers.ConsultarRutaController" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" hgap="20" vgap="20" style="-fx-background-color: #000000;">
+    <padding>
+        <Insets top="30" right="50" bottom="30" left="50"/>
+    </padding>
+
+    <!-- Labels and Inputs -->
+    <Label text="Seleccione la Ruta:" textFill="white" style="-fx-font-size: 16;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="rutaComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1" style="-fx-background-color: #1a1a1a; -fx-text-fill: white;"/>
+
+    <Label text="Consultar paraderos de la ruta" textFill="white" style="-fx-font-size: 18; -fx-font-weight: bold;" GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <Button text="Consultar Paraderos" fx:id="consultarParaderosButton" style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-size: 16;" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+
+    <Label text="Paraderos:" textFill="white" style="-fx-font-size: 16;" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <ListView fx:id="paraderosListView" GridPane.rowIndex="3" GridPane.columnIndex="1" prefHeight="120" style="-fx-background-color: #1a1a1a; -fx-control-inner-background: #1a1a1a; -fx-text-fill: white;"/>
+
+    <Label text="Consulta de horarios entre horas" textFill="white" style="-fx-font-size: 18; -fx-font-weight: bold;" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <Label text="Hora inicio:" textFill="white" style="-fx-font-size: 16;" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+    <TextField fx:id="horaInicioField" GridPane.rowIndex="5" GridPane.columnIndex="1" style="-fx-background-color: #1a1a1a; -fx-text-fill: white;"/>
+    <Label text="Hora fin:" textFill="white" style="-fx-font-size: 16;" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+    <TextField fx:id="horaFinField" GridPane.rowIndex="6" GridPane.columnIndex="1" style="-fx-background-color: #1a1a1a; -fx-text-fill: white;"/>
+
+    <Button text="Consultar Horarios" fx:id="consultarHorariosButton" style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-size: 16;" GridPane.rowIndex="7" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+
+    <Label text="Horarios encontrados:" textFill="white" style="-fx-font-size: 16;" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+    <ListView fx:id="horariosListView" GridPane.rowIndex="8" GridPane.columnIndex="1" prefHeight="120" style="-fx-background-color: #1a1a1a; -fx-control-inner-background: #1a1a1a; -fx-text-fill: white;"/>
+</GridPane>

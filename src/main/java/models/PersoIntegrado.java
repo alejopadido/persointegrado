@@ -2,12 +2,14 @@ package models;
 
 import controllers.ControladorCrearContrato;
 
-import java.io.Serializable;
+import java.io.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersoIntegrado implements Serializable {
+    private static final long serialVersionUID = 1L; // Version de serializacion
+
     private static PersoIntegrado instance;
     List<EmpresaProveedora> empresas;
     List<Ruta> rutas;
@@ -16,6 +18,62 @@ public class PersoIntegrado implements Serializable {
     public PersoIntegrado() {
         empresas = new ArrayList<EmpresaProveedora>();
         rutas = new ArrayList<Ruta>();
+    }
+
+    /**
+     * Uso del patron singleton para garantizar que todas los controladores interactuan con la misma instancia
+     * de perso integrado
+     * @return
+     */
+    public static PersoIntegrado getInstance() {
+        if (instance == null) {
+            // Intentar cargar datos si existen
+            instance = loadData();
+            if (instance == null) {
+                // Si no hay datos guardados, crear una nueva instancia
+                instance = new PersoIntegrado();
+                System.out.println("No se encontraron datos guardados. Se creó una nueva instancia.");
+            } else {
+                System.out.println("Datos cargados exitosamente.");
+                imprimirRutasCargadas();
+            }
+        }
+        return instance;
+    }
+
+    // Método para imprimir las rutas que se han cargado
+    private static void imprimirRutasCargadas() {
+        if (instance != null && !instance.getRutas().isEmpty()) {
+            System.out.println("Las siguientes rutas han sido cargadas:");
+            for (Ruta ruta : instance.getRutas()) {
+                System.out.println(ruta);
+            }
+        } else {
+            System.out.println("No se han encontrado rutas guardadas.");
+        }
+    }
+
+
+    // Método para guardar los datos en un archivo
+    public static void saveData() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("persoIntegradoData.ser"))) {
+            oos.writeObject(instance);
+            System.out.println("Datos guardados exitosamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para cargar los datos desde un archivo
+    public static PersoIntegrado loadData() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("persoIntegradoData.ser"))) {
+            return (PersoIntegrado) ois.readObject();
+        } catch (FileNotFoundException e) {
+            System.out.println("No se encontró un archivo de datos guardados. Creando nueva instancia...");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void guardarNumeroMax(int max){
@@ -159,21 +217,6 @@ public class PersoIntegrado implements Serializable {
         }
     }
 
-    /**
-     * Uso del patron singleton para garantizar que todas los controladores interactuan con la misma instancia
-     * de perso integrado
-     * @return
-     */
-    public static PersoIntegrado getInstance() {
-        if (instance == null) {
-            synchronized (PersoIntegrado.class) {
-                if (instance == null) {
-                    instance = new PersoIntegrado();
-                }
-            }
-        }
-        return instance;
-    }
 
     public List<EmpresaProveedora> getEmpresas() {
         return empresas;
