@@ -174,7 +174,6 @@ public class PersoIntegrado implements Serializable {
         return instance;
     }
 
-
     public List<EmpresaProveedora> getEmpresas() {
         return empresas;
     }
@@ -182,5 +181,22 @@ public class PersoIntegrado implements Serializable {
         return rutas;
     }
 
+
+    /** pagosNominaConductores:
+     * Descripcion: Genera un resumen de los pagos realizados por las rutas.
+     * Este método recorre todos las rutas asociados y obtiene los detalles
+     * de los pagos realizados por cada ruta y sus respectivos autobuses mediante el método
+     * `PagosXRuta()` de la clase `Ruta`.
+     * @return Una lista de String que contiene el nombre de la ruta, el número y una lista
+     * de los pagos realizados por bus asociado de cada una de las rutas en la lista.
+     **/
+    public List<String> pagosNominaConductores(){
+        List<String> pagosNomina = new ArrayList<String>();
+        for(Ruta r : rutas){
+            if( r != null)
+                pagosNomina.add(r.PagosXRuta());
+        }
+        return pagosNomina;
+    }
 
 }

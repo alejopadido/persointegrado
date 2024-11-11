@@ -47,6 +47,33 @@ public class Ruta implements Serializable {
         return nombre;
     }
 
+
+    public LocalTime getInicio() {
+        return horaInicio;
+    }
+
+    public LocalTime getFin() {
+        return horaFin;
+    }
+
+
+
+    /** PagosXRuta:
+     * Descripcion: Genera un resumen de los pagos realizados por los autobuses en una ruta específica.
+     * Este método recorre todos los autobuses asociados a la ruta y obtiene los detalles
+     * de los pagos realizados por cada autobús mediante el método `PagosXBus()` de la clase `Bus`.
+     * @return Una cadena que contiene el nombre de la ruta, el número y una lista
+     * de los pagos realizados por los autobuses en esa ruta.
+     **/
+    public String PagosXRuta(){
+        List<String> pagosXBus = new ArrayList<String>();
+        for(Bus b : buses)
+            if(b != null)
+                pagosXBus.add(b.PagosXBus());
+
+        return "Pagos para la Ruta " + nombre + '\'' + numRuta +
+                "{ " + pagosXBus +" } \n";
+    }
     @Override
     public String toString() {
         return "{nombre: " + nombre +
@@ -59,13 +86,5 @@ public class Ruta implements Serializable {
                 " y las paradas son: " + paraderos +
                 "}\n";
 
-    }
-
-    public LocalTime getInicio() {
-        return horaInicio;
-    }
-
-    public LocalTime getFin() {
-        return horaFin;
     }
 }

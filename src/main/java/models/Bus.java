@@ -50,11 +50,70 @@ public class Bus implements Serializable {
     }
 
 
-
-
     public String getPlaca(){
         return placa;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public String getEmpresaProveedora() {
+        return empresaProveedora;
+    }
+
+    public void setEmpresaProveedora(String empresaProveedora) {
+        this.empresaProveedora = empresaProveedora;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public List<Turno> getTurnos() {
+        return turnos;
+    }
+
+    public void setTurnos(List<Turno> turnos) {
+        this.turnos = turnos;
+    }
+
+    /** PagosXBus:
+     * Descripcion: Genera un resumen de los pagos realizados por turnos en un bus específico.
+     * Este método recorre todos los turnos asociados al bus y obtiene los detalles
+     * de los pagos realizados mediante el método `calcularPago()` de la clase `Turno`.
+     * @return Una cadena que contiene el nombre del conductor y el monto a liquidar segun cuantos turnos
+     * haya realizado.
+     **/
+    public String PagosXBus(){
+        double pago = 0;
+        for(Turno t : turnos){
+            if(t != null)
+                pago += t.calcularPago();
+        }
+        return "Conductor: " + turnos.get(1).getConductor() + " - pago: " + pago + "\n";
+    }
+
 
     @Override
     public String toString() {
