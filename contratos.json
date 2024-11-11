@@ -1,0 +1,103 @@
+[
+  {
+    "nombre": "TransporteLuna",
+    "nit": "4321",
+    "contrato": "125478",
+    "buses": [
+      {"placa": "abc789", "modelo": "X"},
+      {"placa": "def345", "modelo": "Y"},
+      {"placa": "ghi567", "modelo": "Z"}
+    ]
+  },
+  {
+    "nombre": "RutasSol",
+    "nit": "8765",
+    "contrato": "963852",
+    "buses": [
+      {"placa": "jkl123", "modelo": "A1"},
+      {"placa": "mno456", "modelo": "B1"},
+      {"placa": "pqr789", "modelo": "C1"},
+      {"placa": "stu321", "modelo": "D1"}
+    ]
+  },
+  {
+    "nombre": "TransporteViento",
+    "nit": "3456",
+    "contrato": "741963",
+    "buses": [
+      {"placa": "uvw987", "modelo": "E1"},
+      {"placa": "xyz654", "modelo": "F1"},
+      {"placa": "abc234", "modelo": "G1"}
+    ]
+  },
+  {
+    "nombre": "ViajesEstrella",
+    "nit": "5678",
+    "contrato": "147963",
+    "buses": [
+      {"placa": "def890", "modelo": "H1"},
+      {"placa": "ghi321", "modelo": "I1"},
+      {"placa": "jkl654", "modelo": "J1"}
+    ]
+  },
+  {
+    "nombre": "BusRápido",
+    "nit": "1234",
+    "contrato": "852741",
+    "buses": [
+      {"placa": "mno987", "modelo": "K1"},
+      {"placa": "pqr654", "modelo": "L1"},
+      {"placa": "stu321", "modelo": "M1"}
+    ]
+  },
+  {
+    "nombre": "TransportesRápidos",
+    "nit": "2468",
+    "contrato": "159357",
+    "buses": [
+      {"placa": "vwx234", "modelo": "N1"},
+      {"placa": "yza987", "modelo": "O1"},
+      {"placa": "bcd432", "modelo": "P1"}
+    ]
+  },
+  {
+    "nombre": "MovilidadGlobal",
+    "nit": "1357",
+    "contrato": "258963",
+    "buses": [
+      {"placa": "cde567", "modelo": "Q1"},
+      {"placa": "efg678", "modelo": "R1"},
+      {"placa": "ijk789", "modelo": "S1"}
+    ]
+  },
+  {
+    "nombre": "TransExpreso",
+    "nit": "2468",
+    "contrato": "357159",
+    "buses": [
+      {"placa": "lmn345", "modelo": "T1"},
+      {"placa": "opq678", "modelo": "U1"},
+      {"placa": "rst123", "modelo": "V1"}
+    ]
+  },
+  {
+    "nombre": "ViajesHorizonte",
+    "nit": "8642",
+    "contrato": "963741",
+    "buses": [
+      {"placa": "uvw654", "modelo": "W1"},
+      {"placa": "xyz321", "modelo": "X1"},
+      {"placa": "abc876", "modelo": "Y1"}
+    ]
+  },
+  {
+    "nombre": "TransportesMundiales",
+    "nit": "1359",
+    "contrato": "741258",
+    "buses": [
+      {"placa": "cba987", "modelo": "Z1"},
+      {"placa": "dcb654", "modelo": "AA1"},
+      {"placa": "edc321", "modelo": "BB1"}
+    ]
+  }
+]

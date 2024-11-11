@@ -29,6 +29,25 @@ public class Bus implements Serializable {
 
     }
 
+    public Bus(Bus b){
+        this.id = b.getId();
+        this.placa = b.getPlaca();
+        this.empresaProveedora = b.getEmpresaProveedora();
+        this.modelo = b.getModelo();
+        this.estado = b.isEstado();
+        turnos = new ArrayList<Turno>();
+    }
+
+    public Bus(){
+        this.estado = false;
+        this.id = 0;
+        this.placa = "";
+        this.empresaProveedora = "";
+        this.modelo = "";
+        this.estado = false;
+        turnos = new ArrayList<>();
+    }
+
     public boolean verificarValidez(LocalTime inicio, LocalTime fin) {
         for (Turno t : turnos) {
             if(t != null){
