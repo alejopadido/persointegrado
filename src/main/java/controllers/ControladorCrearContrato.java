@@ -68,19 +68,17 @@ public class ControladorCrearContrato {
     private Text tBusActual;
     @FXML
     void onActionSiguienteBus(ActionEvent event) throws BusException {
+        max = persoIntegrado.recibirMax();
         try{
-            tBusActual.setText(String.valueOf(contadorDeBuses));
-            if(contadorDeBuses<=max){
-                persoIntegrado.añadirBus(persoIntegrado.getEmpresas().get(persoIntegrado.getEmpresas().size()-1).getNombre(), tfPlaca.getText().trim(), tfModelo.getText().trim());
+            System.out.println(contadorDeBuses);
+            tBusActual.setText(String.valueOf(contadorDeBuses ));
+            System.out.println("El numero maximo es: " + max);
+            persoIntegrado.añadirBus(persoIntegrado.getEmpresas().get(persoIntegrado.getEmpresas().size()-1).getNombre(), tfPlaca.getText().trim(), tfModelo.getText().trim());
+            if(contadorDeBuses<max){
                 System.out.println("Se ha creado con exito la empresa");
                 persoIntegrado.imprimirEmpresas();
-                Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("crearBus.fxml"));
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                scene = new Scene(fxmlLoader);
-                stage.setScene(scene);
-                stage.show();
+                contadorDeBuses++;
             }else{
-                System.out.println("Se ha creado con exito la empresa");
                 persoIntegrado.imprimirEmpresas();
                 Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("menuAdministrador.fxml"));
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -97,6 +95,7 @@ public class ControladorCrearContrato {
     void onActionIngresarBuses(ActionEvent event) {
         try{
             max = Integer.parseInt(tfNumeroDeBusesAOfrecer.getText().trim());
+            persoIntegrado.guardarNumeroMax(max);
             persoIntegrado.crearEmpresa(tfNombreDeLaEmpresa.getText(),Integer.parseInt(tfNit.getText().trim()),tfNumeroContrato.getText());
             persoIntegrado.imprimirEmpresas();
             Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("crearBus.fxml"));

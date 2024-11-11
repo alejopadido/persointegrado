@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="backgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorCrearRuta">
+   <children>
+      <ImageView fitHeight="69.0" fitWidth="55.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/logoBlanco.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="89.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PersoIntegrado" />
+      <Text fill="WHITE" layoutX="29.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="132.7138671875">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfNombreParadero" layoutX="29.0" layoutY="161.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btnAñadirParada" layoutX="743.0" layoutY="508.0" mnemonicParsing="false" onAction="#onActionAñadirParada" prefHeight="40.0" prefWidth="180.0" text="Siguiente parada" />
+      <Text fx:id="tErrorBus" fill="WHITE" layoutX="34.0" layoutY="534.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <TextField fx:id="tfDireccionParadero" layoutX="254.0" layoutY="163.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="254.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direccion" wrappingWidth="132.7138671875">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="34.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora llegada" wrappingWidth="132.7138671875">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfHoraLlegada" layoutX="34.0" layoutY="312.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="tfMinutoLlegada" layoutX="254.0" layoutY="312.0" prefHeight="0.0" prefWidth="180.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="254.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minuto llegada" wrappingWidth="170.7138671875">
+         <font>
+            <Font name="System Italic" size="23.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
