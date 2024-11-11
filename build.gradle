@@ -40,7 +40,8 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     // https://mvnrepository.com/artifact/com.sun.mail/javax.mail
     implementation 'com.sun.mail:javax.mail:1.6.2'
-
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
+    implementation 'com.opencsv:opencsv:5.5.2'
 }
 
 test {

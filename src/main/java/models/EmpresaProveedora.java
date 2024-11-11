@@ -26,14 +26,37 @@ public class EmpresaProveedora implements Serializable {
         }
 
     }
+    public EmpresaProveedora(EmpresaProveedora e){
+        this.nombre = e.getNombre();
+        this.nit = e.getNit();
+        this.contrato = e.getContrato();
+        buses = new ArrayList<Bus>();
+        buses.addAll(e.getBuses());
+    }
+
+    public EmpresaProveedora(){
+        this.nombre = null;
+        this.nit = 0;
+        this.contrato = null;
+        buses = new ArrayList<Bus>();
+    }
 
     public void añadirBus(int id, String placa, String modelo) throws EmpresaProveedoraException, BusException {
         if(id<1 || placa.equalsIgnoreCase("") || modelo.equalsIgnoreCase("")) {
             throw new EmpresaProveedoraException("Los campos no pueden estar vacios");
         }else if(revisarPlacaDuplicad(placa)){
-            throw new BusException("El placa ya existe");
+            throw new EmpresaProveedoraException("El placa ya existe");
         }else{
             buses.add(new Bus(id, placa, this.nombre, modelo));
+        }
+    }
+    public void añadirBus(Bus bus) throws EmpresaProveedoraException, BusException {
+        if(bus.getId()<1 || bus.getPlaca().equalsIgnoreCase("") || bus.getModelo().equalsIgnoreCase("")) {
+            throw new EmpresaProveedoraException("Los campos no pueden estar vacios");
+        }else if(revisarPlacaDuplicad(bus.getPlaca())){
+            throw new EmpresaProveedoraException("El placa ya existe");
+        }else{
+            buses.add(new Bus(bus));
         }
     }
 
@@ -75,6 +98,10 @@ public class EmpresaProveedora implements Serializable {
         return buses;
     }
 
+    public void setBuses(List<Bus> buses) {
+        this.buses = buses;
+    }
+
     public int getBusesSize(){
         return buses.size();
     }
@@ -98,6 +125,11 @@ public class EmpresaProveedora implements Serializable {
     public ContratoProveedor getContrato() {
         return contrato;
     }
+
+    public String getContrato2() {
+        return this.contrato.getContrato();
+    }
+
 
     public void setContrato(ContratoProveedor contrato) {
         this.contrato = contrato;

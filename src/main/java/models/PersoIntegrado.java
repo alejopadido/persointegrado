@@ -1,11 +1,13 @@
 package models;
 
 import controllers.ControladorCrearContrato;
+import utils.manejadorArchivos;
 
 import java.io.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PersoIntegrado implements Serializable {
     private static final long serialVersionUID = 1L; // Version de serializacion
@@ -20,6 +22,7 @@ public class PersoIntegrado implements Serializable {
         empresas = new ArrayList<EmpresaProveedora>();
         rutas = new ArrayList<Ruta>();
         paraderoManager = ParaderoManager.getInstance();
+
     }
 
     /**
@@ -58,7 +61,7 @@ public class PersoIntegrado implements Serializable {
         }
     }
 
-    // Método para obtener el ParaderoManager
+    // Metodo para obtener el ParaderoManager
     public ParaderoManager getParaderoManager() {
         if (paraderoManager == null) {
             paraderoManager = ParaderoManager.getInstance();
@@ -81,6 +84,9 @@ public class PersoIntegrado implements Serializable {
 
     // Método para guardar los datos en un archivo
     public static void saveData() {
+        manejadorArchivos.leerArchivoContratos("contratos.txt");
+        manejadorArchivos.leerContratoJson("contratos.json");
+        manejadorArchivos.leerContratoCsv("contratos.csv");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("persoIntegradoData.ser"))) {
             oos.writeObject(instance);
             System.out.println("Datos guardados exitosamente.");
@@ -123,6 +129,19 @@ public class PersoIntegrado implements Serializable {
 
         }
     }
+    public void crearEmpresa(EmpresaProveedora em) throws PersoIntegradoException, EmpresaProveedoraException, ContratoProveedorException {
+        boolean flag = true;
+        for(EmpresaProveedora e: empresas){
+            if(e != null){
+                if(e.getNit() == em.getNit() || e.getNombre().equalsIgnoreCase(em.getNombre()) || Objects.equals(e.getContrato().getContrato(), em.getContrato().getContrato())){
+                    flag = false;
+                }
+            }
+        }
+        if(flag){
+            empresas.add(new EmpresaProveedora(em));
+        }
+    }
 
     public void añadirBus(String nombreEmpresa,String placa, String modelo) throws BusException, EmpresaProveedoraException {
         for(EmpresaProveedora e: empresas){
@@ -133,6 +152,17 @@ public class PersoIntegrado implements Serializable {
             }
         }
     }
+
+    public void añadirBus(Bus bus) throws BusException, EmpresaProveedoraException {
+        for(EmpresaProveedora e: empresas){
+            if(e != null){
+                if(e.getNombre().equalsIgnoreCase(bus.getEmpresaProveedora())){
+                    e.añadirBus(bus);
+                }
+            }
+        }
+    }
+
 
     public void crearRuta(String conductor, LocalTime inicio, LocalTime fin, LocalTime inicioRuta, LocalTime finRuta, String nombre, int numeroDeRuta, boolean ciclico, int busesDisponibles) throws PersoIntegradoException {
 
