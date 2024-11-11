@@ -37,6 +37,7 @@ public class PersoIntegrado implements Serializable {
         }
         if(flag){
             empresas.add(new EmpresaProveedora(nombre, nit, contrato));
+
         }
     }
 
