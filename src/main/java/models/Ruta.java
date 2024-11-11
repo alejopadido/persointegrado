@@ -19,7 +19,6 @@ public class Ruta implements Serializable {
     private List<Bus> buses;
     private List<Paradero> paraderos;
 
-
     public Ruta(LocalTime incio, LocalTime fin, String nombre, int numeroDeRuta, boolean ciclico, int busesDisponibles) {
         this.nombre = nombre;
         this.numRuta = numeroDeRuta;
@@ -109,6 +108,10 @@ public class Ruta implements Serializable {
         return Math.abs(indiceDestino - indiceOrigen) - 1; // Retorna la cantidad de paraderos entre ambos
     }
 
+    public List<Bus> getBuses() {
+        return buses;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -129,5 +132,4 @@ public class Ruta implements Serializable {
         }
         return sb.toString();
     }
-
 }

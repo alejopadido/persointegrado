@@ -40,7 +40,9 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     // https://mvnrepository.com/artifact/com.sun.mail/javax.mail
     implementation 'com.sun.mail:javax.mail:1.6.2'
-
+    implementation 'org.openjfx:javafx-controls:17'
+    implementation 'org.openjfx:javafx-fxml:17'
+    implementation 'javax.activation:javax.activation-api:1.2.0'
 }
 
 test {
