@@ -3,6 +3,7 @@ module org.persointegrado.persointegrado {
     requires javafx.fxml;
     requires java.mail;
     requires java.sql;
+    requires activation;
     requires javafx.graphics;
 
     opens controllers to javafx.fxml;
