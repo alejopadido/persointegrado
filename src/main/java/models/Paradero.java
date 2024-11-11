@@ -15,6 +15,10 @@ public class Paradero implements Serializable {
         this.horaDeLlegada = new HoraDeLlegada(horaDeLlegada);
     }
 
+    public HoraDeLlegada getHoraDeLlegada() {
+        return horaDeLlegada;
+    }
+
     @Override
     public String toString() {
         return "{nombre: " + nombre

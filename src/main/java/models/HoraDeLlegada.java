@@ -16,5 +16,9 @@ public class HoraDeLlegada implements Serializable {
                 "hora=" + hora +
                 '}';
     }
+
+    public LocalTime getHora() {
+        return hora;
+    }
 }
 

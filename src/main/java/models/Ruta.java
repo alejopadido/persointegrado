@@ -56,7 +56,9 @@ public class Ruta implements Serializable {
         return horaFin;
     }
 
-
+    public List<Paradero> getParaderos() {
+        return paraderos;
+    }
 
     /** PagosXRuta:
      * Descripcion: Genera un resumen de los pagos realizados por los autobuses en una ruta específica.
