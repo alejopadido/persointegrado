@@ -5,6 +5,8 @@ import java.time.Duration;
 import java.time.LocalTime;
 
 public class Turno implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private String conductor;

@@ -3,6 +3,7 @@ package models;
 import java.io.Serializable;
 
 public class ContratoProveedor implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String contrato;
 
     public ContratoProveedor(String contrato) throws ContratoProveedorException{

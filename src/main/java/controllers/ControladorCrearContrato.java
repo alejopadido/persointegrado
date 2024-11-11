@@ -74,6 +74,7 @@ public class ControladorCrearContrato {
             tBusActual.setText(String.valueOf(contadorDeBuses ));
             System.out.println("El numero maximo es: " + max);
             persoIntegrado.añadirBus(persoIntegrado.getEmpresas().get(persoIntegrado.getEmpresas().size()-1).getNombre(), tfPlaca.getText().trim(), tfModelo.getText().trim());
+            PersoIntegrado.saveData();
             if(contadorDeBuses<max){
                 System.out.println("Se ha creado con exito la empresa");
                 persoIntegrado.imprimirEmpresas();
@@ -98,6 +99,7 @@ public class ControladorCrearContrato {
             max = Integer.parseInt(tfNumeroDeBusesAOfrecer.getText().trim());
             persoIntegrado.guardarNumeroMax(max);
             persoIntegrado.crearEmpresa(tfNombreDeLaEmpresa.getText(),Integer.parseInt(tfNit.getText().trim()),tfNumeroContrato.getText());
+            PersoIntegrado.saveData();
             persoIntegrado.imprimirEmpresas();
             Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("crearBus.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();

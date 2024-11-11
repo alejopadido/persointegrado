@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalTime;
 
 public class Paradero implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String nombre;
     private String direccion;
     private HoraDeLlegada horaDeLlegada;
