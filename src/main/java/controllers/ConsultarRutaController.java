@@ -2,12 +2,19 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import models.Paradero;
 import models.PersoIntegrado;
 import models.Ruta;
 
+import java.io.IOException;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +35,8 @@ public class ConsultarRutaController {
     private Button consultarHorariosButton;
     @FXML
     private ListView<String> horariosListView;
+    @FXML
+    private Button volverButton;
 
     private PersoIntegrado persoIntegrado;
 
@@ -45,6 +54,7 @@ public class ConsultarRutaController {
         // Configurar eventos para los botones
         consultarParaderosButton.setOnAction(event -> consultarParaderos());
         consultarHorariosButton.setOnAction(event -> consultarHorarios());
+        volverButton.setOnAction(event -> volverAlMenu(event));
     }
 
     private void consultarParaderos() {
@@ -96,5 +106,18 @@ public class ConsultarRutaController {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void volverAlMenu(ActionEvent event) {
+        try {
+            Parent menuUsuarioParent = FXMLLoader.load(getClass().getResource("/org/persointegrado/persointegrado/menuUsuario.fxml"));
+            Scene menuUsuarioScene = new Scene(menuUsuarioParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(menuUsuarioScene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

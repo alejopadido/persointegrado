@@ -118,17 +118,7 @@ public class Bus implements Serializable {
 
     @Override
     public String toString() {
-        String s;
-        if(!this.estado){
-            s = "No está asignado actualmente";
-        }else{
-            s = "Ya se encuentra asignado";
-        }
-        return "{id: " + id +
-                "Placa: " + placa +
-                "Nombre de la empresa proveedora: " + empresaProveedora +
-                "Modelo: " + modelo +
-                "Estado: " + s +
-                "} ";
+        return "id: " + id + ", Placa: " + placa + ", Empresa: " + empresaProveedora + ", Modelo: " + modelo + ", Estado: " + (estado ? "Asignado" : "No asignado");
     }
+
 }

@@ -14,10 +14,12 @@ public class PersoIntegrado implements Serializable {
     List<EmpresaProveedora> empresas;
     List<Ruta> rutas;
     private int max;
+    private transient ParaderoManager paraderoManager;
 
     public PersoIntegrado() {
         empresas = new ArrayList<EmpresaProveedora>();
         rutas = new ArrayList<Ruta>();
+        paraderoManager = ParaderoManager.getInstance();
     }
 
     /**
@@ -34,11 +36,34 @@ public class PersoIntegrado implements Serializable {
                 instance = new PersoIntegrado();
                 System.out.println("No se encontraron datos guardados. Se creó una nueva instancia.");
             } else {
+                instance.initializeTransientFields();
                 System.out.println("Datos cargados exitosamente.");
                 imprimirRutasCargadas();
             }
         }
         return instance;
+    }
+
+    private void initializeTransientFields() {
+        if (paraderoManager == null) {
+            paraderoManager = ParaderoManager.getInstance();
+        }
+
+        // Sincronizar todos los paraderos de las rutas con el ParaderoManager
+        for (Ruta ruta : rutas) {
+            System.out.println("A continuacion los paraderos de la ruta:" + ruta.getParaderos());
+            for (Paradero paradero : ruta.getParaderos()) {
+                paraderoManager.obtenerParadero(paradero.getNombre(), paradero.getDireccion(), paradero.getHoraDeLlegada().getHora());
+            }
+        }
+    }
+
+    // Método para obtener el ParaderoManager
+    public ParaderoManager getParaderoManager() {
+        if (paraderoManager == null) {
+            paraderoManager = ParaderoManager.getInstance();
+        }
+        return paraderoManager;
     }
 
     // Método para imprimir las rutas que se han cargado
@@ -147,7 +172,7 @@ public class PersoIntegrado implements Serializable {
                 r.añadirParadero(nombreParadero, direccion, llegada);
             }
         }
-
+        saveData();
     }
 
 
