@@ -26,6 +26,7 @@ public class MainApplication extends Application {
 
     @Override
     public void stop() {
+        PersoIntegrado.actualizarListaTarjetas();
         // Guardar datos al cerrar la aplicación
         PersoIntegrado.saveData();
     }

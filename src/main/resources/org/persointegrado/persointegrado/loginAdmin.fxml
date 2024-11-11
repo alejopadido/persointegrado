@@ -1,44 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="backgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorLogin">
    <children>
-      <ImageView fitHeight="198.0" fitWidth="309.0" layoutX="184.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+      <!-- Logo -->
+      <ImageView fitHeight="120.0" fitWidth="150.0" layoutX="425.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/logoBlanco.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="31.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido Administrador">
+
+      <!-- Título Bienvenida -->
+      <Text fill="WHITE" layoutX="300.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido Administrador">
          <font>
-            <Font size="44.0" />
-         </font></Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" layoutX="557.0" layoutY="1.0" stroke="#e5f1ff" strokeType="INSIDE" strokeWidth="10.0" width="443.0" />
-      <Text layoutX="594.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero de cedula">
-         <font>
-            <Font size="34.0" />
-         </font></Text>
-      <Text layoutX="594.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
-         <font>
-            <Font size="34.0" />
-         </font></Text>
-      <TextField fx:id="tfNumeroDeCedula" layoutX="594.0" layoutY="153.0" onAction="#onActionNumeroDeCedula" prefHeight="45.0" prefWidth="278.0">
-         <font>
-            <Font size="23.0" />
-         </font></TextField>
-      <TextField fx:id="tfContrasena" layoutX="594.0" layoutY="316.0" onAction="#onActionContrasena">
-         <font>
-            <Font size="23.0" />
-         </font></TextField>
-      <Button fx:id="btnIngresar" layoutX="691.0" layoutY="425.0" mnemonicParsing="false" onAction="#onActionIngresar" text="Ingresar">
-         <font>
-            <Font size="37.0" />
-         </font></Button>
-      <Text fx:id="tError" layoutX="603.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Font size="36.0" />
+         </font>
+      </Text>
+
+      <!-- Etiqueta y Campo de Texto para Número de Cédula -->
+      <Label text="Número de Cédula" textFill="white" layoutX="300.0" layoutY="250.0" style="-fx-font-size: 20px;"/>
+      <TextField fx:id="tfNumeroDeCedula" layoutX="300.0" layoutY="280.0" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #1a1a1a; -fx-text-fill: white; -fx-font-size: 18px;" />
+
+      <!-- Etiqueta y Campo de Texto para Contraseña -->
+      <Label text="Contraseña" textFill="white" layoutX="300.0" layoutY="340.0" style="-fx-font-size: 20px;"/>
+      <PasswordField fx:id="tfContrasena" layoutX="300.0" layoutY="370.0" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #1a1a1a; -fx-text-fill: white; -fx-font-size: 18px;" />
+
+      <!-- Botón para Ingresar -->
+      <Button fx:id="btnIngresar" layoutX="400.0" layoutY="450.0" mnemonicParsing="false" onAction="#onActionIngresar" text="Ingresar"
+              style="-fx-background-color: #103fdc; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" />
+
+      <!-- Texto de Error -->
+      <Text fx:id="tError" layoutX="300.0" layoutY="430.0" fill="red" style="-fx-font-size: 16px;" />
    </children>
 </AnchorPane>

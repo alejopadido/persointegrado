@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import org.persointegrado.persointegrado.MainApplication;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ControladorMenuAdministrador {
 
@@ -62,6 +63,25 @@ public class ControladorMenuAdministrador {
     @FXML
     void onMouseClickedPagarPasaje(MouseEvent event) {
 
+    }
+
+    @FXML
+    void onMouseClickedCrearTarjeta(MouseEvent event) {
+
+        try {
+            // Cargar la nueva pantalla "ConsultarRuta.fxml" desde la ubicación correcta
+            Parent consultarRutaParent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/org/persointegrado/persointegrado/CrearTarjeta.fxml")));
+
+            // Obtener el Stage actual desde el evento
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Crear una nueva escena y configurarla en el stage
+            Scene scene = new Scene(consultarRutaParent);
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

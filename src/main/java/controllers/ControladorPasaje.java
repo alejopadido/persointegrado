@@ -12,12 +12,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import models.Bus;
 import models.PersoIntegrado;
 import models.Ruta;
+import models.TarjetaManager;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -26,16 +26,16 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class PasajeController {
+public class ControladorPasaje {
 
     @FXML
-    private ComboBox<String> rutasComboBox; // ComboBox para seleccionar el nombre de la ruta
+    private ComboBox<String> rutasComboBox;
 
     @FXML
-    private ComboBox<Bus> busesComboBox; // ComboBox para seleccionar el bus
+    private ComboBox<Bus> busesComboBox;
 
     @FXML
-    private ComboBox<String> tipoUsuarioComboBox; // ComboBox para seleccionar el tipo de usuario
+    private ComboBox<String> tipoUsuarioComboBox;
 
     @FXML
     private TextField tarjetaField;
@@ -47,12 +47,14 @@ public class PasajeController {
     private Label montoLabel;
 
     private PersoIntegrado persoIntegrado;
+    private TarjetaManager tarjetaManager;
 
     @FXML
     public void initialize() {
         persoIntegrado = PersoIntegrado.getInstance();
+        tarjetaManager = persoIntegrado.getTarjetaManager(); // Obtiene la instancia de TarjetaManager
 
-        // Inicializar ComboBox con los nombres de las rutas disponibles
+        // Inicializa rutasComboBox con los nombres de rutas disponibles
         ObservableList<String> rutasNombres = FXCollections.observableArrayList(
                 persoIntegrado.getRutas().stream()
                         .map(Ruta::getNombre)
@@ -60,8 +62,7 @@ public class PasajeController {
         );
         rutasComboBox.setItems(rutasNombres);
 
-
-        // Configurar el ComboBox de buses para mostrar solo ID y placa
+        // Configura busesComboBox para mostrar solo ID y placa
         busesComboBox.setConverter(new StringConverter<Bus>() {
             @Override
             public String toString(Bus bus) {
@@ -70,12 +71,12 @@ public class PasajeController {
 
             @Override
             public Bus fromString(String string) {
-                return null; // No se necesita conversión inversa
+                return null;
             }
         });
 
-        // Poblar el ComboBox de tipo de usuario con las opciones
-        tipoUsuarioComboBox.getItems().addAll("Mayor de edad", "Discapacitado", "Estudiante", "Usuario Normal");
+        // Poblar el ComboBox de tipo de usuario usando TIPOS_USUARIO_TARIFAS de TarjetaManager
+        tipoUsuarioComboBox.getItems().addAll(tarjetaManager.getTIPOS_USUARIO_TARIFAS().keySet());
         tipoUsuarioComboBox.setOnAction(event -> calcularMonto());
         horaField.setOnKeyReleased(event -> calcularMonto());
 
@@ -83,7 +84,7 @@ public class PasajeController {
         rutasComboBox.setOnAction(event -> onRutaSeleccionada());
     }
 
-    private void onRutaSeleccionada(){
+    private void onRutaSeleccionada() {
         String nombreRutaSeleccionada = rutasComboBox.getValue();
         if (nombreRutaSeleccionada != null) {
             Optional<Ruta> rutaSeleccionada = persoIntegrado.getRutas().stream()
@@ -94,17 +95,13 @@ public class PasajeController {
         }
     }
 
-    /**
-     * Método para actualizar el ComboBox de buses en función de la ruta seleccionada.
-     */
     private void actualizarBuses(Ruta ruta) {
-        busesComboBox.getItems().clear(); // Limpiar los buses existentes en el ComboBox
-        busesComboBox.getItems().addAll(ruta.getBuses()); // Añadir los buses de la ruta seleccionada
+        busesComboBox.getItems().clear();
+        busesComboBox.getItems().addAll(ruta.getBuses());
     }
 
     @FXML
     private void pagarPasaje() {
-        // Obtener el nombre de la ruta seleccionada, el bus seleccionado, y el tipo de usuario
         String nombreRutaSeleccionada = rutasComboBox.getValue();
         Bus busSeleccionado = busesComboBox.getValue();
         String tipoUsuario = tipoUsuarioComboBox.getValue();
@@ -124,7 +121,6 @@ public class PasajeController {
             return;
         }
 
-        // Lógica para procesar el pago del pasaje, puedes incluir descuentos según el tipo de usuario
         showAlert("Pago Exitoso", "El pasaje ha sido cobrado con éxito en la ruta " + nombreRutaSeleccionada +
                 " usando el bus " + busSeleccionado.getId() + " para un usuario de tipo " + tipoUsuario);
     }
@@ -132,30 +128,34 @@ public class PasajeController {
     private void calcularMonto() {
         String tipoUsuario = tipoUsuarioComboBox.getValue();
         String horaText = horaField.getText();
-        int monto = 0;
 
         if (tipoUsuario == null || horaText.isEmpty()) {
             montoLabel.setText("Seleccione tipo de usuario y hora");
+            montoLabel.setStyle("-fx-text-fill: #ff9900;");
             return;
         }
 
         try {
             LocalTime hora = LocalTime.parse(horaText, DateTimeFormatter.ofPattern("HH:mm"));
+
+            // Definimos las horas valle de acuerdo a los criterios mencionados.
             boolean esHoraValle = (hora.isBefore(LocalTime.of(5, 30)) ||
                     (hora.isAfter(LocalTime.of(8, 29)) && hora.isBefore(LocalTime.of(16, 30))) ||
                     hora.isAfter(LocalTime.of(19, 30)));
 
-            switch (tipoUsuario) {
-                case "Estudiante": monto = 1400; break;
-                case "Mayor de edad": monto = 1250; break;
-                case "Discapacitado": monto = 1300; break;
-                case "Usuario Normal": monto = esHoraValle ? 1400 : 1700; break;
+            // Usar TarjetaManager para obtener la tarifa según el tipo de usuario y si es hora valle
+            int monto = tarjetaManager.getTarifa(tipoUsuario);
+            if (esHoraValle){
+                monto -= 300;
             }
             montoLabel.setText("$" + monto);
+            montoLabel.setStyle("-fx-text-fill: #02ff24;");
         } catch (DateTimeParseException e) {
             montoLabel.setText("Hora inválida");
+            montoLabel.setStyle("-fx-text-fill: red;");
         }
     }
+
 
     @FXML
     private void volverAlMenu(ActionEvent event) {

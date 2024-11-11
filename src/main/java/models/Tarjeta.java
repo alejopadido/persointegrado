@@ -1,14 +1,15 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tarjeta {
-    private String id;
+public class Tarjeta implements Serializable {
+    private Integer id;
     private double saldo;
     private List<TransaccionPasaje> transacciones;
 
-    public Tarjeta(String id, double saldoInicial) {
+    public Tarjeta(Integer id, double saldoInicial) {
         this.id = id;
         this.saldo = saldoInicial;
         this.transacciones = new ArrayList<>();
@@ -27,7 +28,7 @@ public class Tarjeta {
         }
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 }

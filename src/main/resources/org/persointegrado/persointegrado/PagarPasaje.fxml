@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane fx:controller="controllers.PasajeController"
+<GridPane fx:controller="controllers.ControladorPasaje"
           xmlns:fx="http://javafx.com/fxml/1"
           alignment="CENTER"
           hgap="20" vgap="20"
@@ -58,6 +58,6 @@
 
     <!-- Botón para volver al menú de usuario -->
     <Button text="Volver al Menú" onAction="#volverAlMenu"
-            style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"
+            style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-size: 18px;"
             GridPane.rowIndex="7" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
 </GridPane>
