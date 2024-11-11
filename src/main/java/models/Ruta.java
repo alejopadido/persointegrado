@@ -41,7 +41,7 @@ public class Ruta implements Serializable {
     }
 
     public void añadirParadero(String nombreParadero, String direccion, LocalTime llegada){
-        paraderos.add(new Paradero(nombreParadero,direccion, llegada));
+        paraderos.add(ParaderoManager.obtenerParadero(nombreParadero, direccion, llegada));
     }
 
     public String getNombre() {
