@@ -157,7 +157,7 @@ public class ControladorPasaje {
         }
 
         showAlert("Pago Exitoso", "El pasaje ha sido cobrado con éxito en la ruta " + nombreRutaSeleccionada +
-                " usando el bus " + busSeleccionado.getId() + " para un usuario de tipo " + tipoUsuario);
+                " usando el bus " + busSeleccionado.getId() + " para un usuario de tipo " + tipoUsuario + " monto cobrado: " + monto + " Saldo restante: " + tarjetaSelecc.getSaldo());
     }
 
 
