@@ -141,4 +141,17 @@ public class ControladorMenuAdministrador {
 
     }
 
+    @FXML
+    private void volverAlMenu(ActionEvent event) {
+        try {
+            Parent menuUsuarioParent = FXMLLoader.load(getClass().getResource("/org/persointegrado/persointegrado/login0.fxml"));
+            Scene menuUsuarioScene = new Scene(menuUsuarioParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(menuUsuarioScene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

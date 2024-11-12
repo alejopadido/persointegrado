@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -110,6 +111,19 @@ public class ControladorMenuUsuario {
             // Crear una nueva escena y configurarla en el stage
             Scene scene = new Scene(consultarRutaParent);
             window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void volverAlMenu(ActionEvent event) {
+        try {
+            Parent menuUsuarioParent = FXMLLoader.load(getClass().getResource("/org/persointegrado/persointegrado/login0.fxml"));
+            Scene menuUsuarioScene = new Scene(menuUsuarioParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(menuUsuarioScene);
             window.show();
         } catch (IOException e) {
             e.printStackTrace();
