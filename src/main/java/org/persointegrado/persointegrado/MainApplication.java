@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.PersoIntegrado;
+import utils.manejadorArchivos;
 
 import java.io.IOException;
 
@@ -14,7 +15,10 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // Cargar datos previamente guardados al iniciar la aplicación
-        PersoIntegrado.getInstance();
+        PersoIntegrado perso = PersoIntegrado.getInstance();
+        perso.cargarContratoTXT();
+        perso.cargarContratoJSON();
+        perso.cargarContratoCSV();
 
         // Cargar la pantalla principal
         Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("login0.fxml"));

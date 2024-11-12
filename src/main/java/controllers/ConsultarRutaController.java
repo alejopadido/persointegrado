@@ -40,7 +40,7 @@ public class ConsultarRutaController {
 
     private PersoIntegrado persoIntegrado;
 
-    public void initialize() {
+    public void initialize(){
         persoIntegrado = PersoIntegrado.getInstance();
 
         // Inicializar ComboBox con las rutas disponibles

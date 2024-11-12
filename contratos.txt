@@ -1,0 +1,72 @@
+10
+EmpresaPrueba
+1234
+985212
+3
+abc123 A
+bft543 B
+hjt536 C
+BusesAlejandro
+5678
+789456
+4
+kpt980 D
+lmn234 E
+opr675 F
+qrs190 G
+FlotasSebastian
+9101
+654321
+3
+uvw789 H
+xyz567 I
+abc890 J
+CamnionesSara
+1122
+147258
+3
+def345 K
+ghi678 L
+jkl901 M
+TransportadoraSalomon
+3344
+369852
+3
+mno234 N
+pqr567 O
+stu890 P
+TransportesUnidos
+5566
+951753
+3
+vwx123 Q
+yza456 R
+bcd789 S
+MovilidadCiudadana
+7788
+123789
+3
+cde123 T
+efgh456 U
+ijk789 V
+TransmiMovil
+9900
+741852
+3
+lmn123 W
+opq456 X
+rst789 Y
+ViajesCiudadanos
+1212
+963852
+3
+uvw123 Z
+xyz456 AA
+abc789 BB
+TransportesModernos
+3434
+258741
+3
+cba123 CC
+dcb456 DD
+edc789 EE
