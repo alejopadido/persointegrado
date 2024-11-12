@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.databind.util.ISO8601Utils;
 import controllers.ControladorCrearContrato;
 import utils.manejadorArchivos;
 
@@ -84,7 +85,6 @@ public class PersoIntegrado implements Serializable {
 
     // Método para guardar los datos en un archivo
     public static void saveData() {
-        manejadorArchivos.lecturaArchivoRutas();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("persoIntegradoData.ser"))) {
             oos.writeObject(instance);
             System.out.println("Datos guardados exitosamente.");
@@ -118,6 +118,9 @@ public class PersoIntegrado implements Serializable {
         utils.manejadorArchivos.leerContratoCsv("contratos.csv");
     }
 
+    public void leerRutas(){
+        utils.manejadorArchivos.lecturaArchivoRutas();
+    }
     public void guardarNumeroMax(int max){
         this.max = max;
     }
@@ -175,7 +178,7 @@ public class PersoIntegrado implements Serializable {
     }
 
 
-    public void crearRuta(String conductor, LocalTime inicio, LocalTime fin, LocalTime inicioRuta, LocalTime finRuta, String nombre, int numeroDeRuta, boolean ciclico, int busesDisponibles) throws PersoIntegradoException {
+    public void crearRuta(List<String> conductor, LocalTime inicio, LocalTime fin, LocalTime inicioRuta, LocalTime finRuta, String nombre, int numeroDeRuta, boolean ciclico, int busesDisponibles) throws PersoIntegradoException {
 
         if (nombre.equalsIgnoreCase("") || numeroDeRuta <= 0 || busesDisponibles <= 0) {
             throw new PersoIntegradoException("No pueden existir nulos o menores a 0");
@@ -185,7 +188,7 @@ public class PersoIntegrado implements Serializable {
             System.out.println("Buses válidos: " + x);
             if (x >= busesDisponibles) {
                 System.out.println("Obteniendo buses disponibles...");
-                List<List<Bus>> buses = busesDisponibles(inicio, fin, conductor);
+                List<List<Bus>> buses = busesDisponibles(inicio, fin, conductor, busesDisponibles);
                 Ruta nuevaRuta = new Ruta(inicioRuta, finRuta, nombre, numeroDeRuta, ciclico, busesDisponibles);
                 rutas.add(nuevaRuta);
                 System.out.println("Añadiendo buses a la ruta...");
@@ -228,11 +231,18 @@ public class PersoIntegrado implements Serializable {
     }
 
 
-    public List<List<Bus>> busesDisponibles(LocalTime inicio, LocalTime fin, String conductor) {
+    public List<List<Bus>> busesDisponibles(LocalTime inicio, LocalTime fin, List<String> conductor, int limite) {
         List<List<Bus>> ls = new ArrayList<>();
+        int conta = 0;
         for (EmpresaProveedora e : empresas) {
             if (e != null) {
-                ls.add(e.busesDisponibles(inicio, fin, conductor));
+                if(conta<limite){
+                    ls.add(e.busesDisponibles(inicio, fin,conductor.get(conta)));
+                    conta++;
+                }else{
+                    ls.add(e.busesDisponibles(inicio, fin,conductor.get(conta)));
+                }
+
             }
         }
         return ls;
@@ -308,5 +318,6 @@ public class PersoIntegrado implements Serializable {
         }
         return pagosNomina;
     }
+
 
 }

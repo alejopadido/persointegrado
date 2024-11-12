@@ -128,7 +128,7 @@ public class ControladorCrearRuta {
         LocalTime inicioRuta = util.integersToTimes(Integer.parseInt(tfHoraInicioRuta.getText()), Integer.parseInt(tfMinutoInicioRuta.getText()));
         LocalTime finRuta = util.integersToTimes(Integer.parseInt(tfHoraFinRuta.getText()), Integer.parseInt(tfMinutoFinRuta.getText()));
         boolean state = cbCiclico.isSelected();
-        persoIntegrado.crearRuta(tfNombreConductor.getText(),inicioTurno,finTurno,inicioRuta,finRuta, tfNombre.getText(), Integer.parseInt(tfNumero.getText().trim()), state, Integer.parseInt(tfBusesDisponibles.getText().trim()));
+        persoIntegrado.crearRuta(util.listaConductores(tfNombreConductor.getText()),inicioTurno,finTurno,inicioRuta,finRuta, tfNombre.getText(), Integer.parseInt(tfNumero.getText().trim()), state, Integer.parseInt(tfBusesDisponibles.getText().trim()));
         PersoIntegrado.saveData();
         Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("añadirParaderos.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

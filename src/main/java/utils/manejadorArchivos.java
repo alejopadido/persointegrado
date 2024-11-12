@@ -146,52 +146,48 @@ public class manejadorArchivos {
     public static void lecturaArchivoRutas(){
         String cadena, nombreConductor, nombreRut;
         int numRut, busesDispo, HoraIn, minutosIn, HoraFin, minutosFin;
-        LocalTime horaInicio, horaFin;
+        LocalTime horaInicioT, horaFinT, horaInicioR, horaFinR;
         boolean ciclico;
-        Turno t;
-        Ruta rut;
+        Turno t = null;
+        Ruta rut = null;
 
 
         try {
-            InputStreamReader input=new InputStreamReader(new FileInputStream("D:\\ISIST\\persointegrado\\Ruta.txt"));
+            InputStreamReader input=new InputStreamReader(new FileInputStream("Ruta.txt"));
             BufferedReader fa=new BufferedReader(input);
             cadena=fa.readLine();
-            while(!cadena.equalsIgnoreCase("#FIN"))
-            {
-                if(cadena.equalsIgnoreCase("#Turno"))
-                {
-                    fa.readLine(); //Para saltarse la fila de títulos
-                    cadena = fa.readLine(); //Lee siguiente línea para obtener el nombre del código
+            while(!cadena.equalsIgnoreCase("#FIN")) {
+                if (cadena.equalsIgnoreCase("#Turno")) {
+                    fa.readLine(); //#Conductor - Hora inicio - Hora Final
+                    cadena = fa.readLine(); //Lectura de datos
                     Scanner separada = new Scanner(cadena).useDelimiter(", ");
 
                     nombreConductor = separada.next();
                     HoraIn = Integer.parseInt(separada.next());
                     minutosIn = Integer.parseInt(separada.next());
                     //Convertir de entero a LocalTime
-                    horaInicio = util.integersToTimes(HoraIn, minutosIn);
+                    horaInicioT = util.integersToTimes(HoraIn, minutosIn);
 
                     HoraFin = Integer.parseInt(separada.next());
                     minutosFin = Integer.parseInt(separada.next());
-                    horaFin = util.integersToTimes(HoraFin, minutosFin);
+                    horaFinT = util.integersToTimes(HoraFin, minutosFin);
 
-                    t = new Turno(horaInicio, horaFin, nombreConductor);
+                    t = new Turno(horaInicioT, horaFinT, nombreConductor);
                     System.out.println(t);
 
-                    cadena = fa.readLine();
-                }
-                else if (cadena.equalsIgnoreCase("#Turno"))
-                {
-                    cadena = fa.readLine();
+                    cadena = fa.readLine(); //Ruta
+                } else {
+                    System.out.println(cadena);
 
                     Scanner separada = new Scanner(cadena).useDelimiter(", ");
                     HoraIn = Integer.parseInt(separada.next());
                     minutosIn = Integer.parseInt(separada.next());
                     //Convertir de entero a LocalTime
-                    horaInicio = util.integersToTimes(HoraIn, minutosIn);
+                    horaInicioR = util.integersToTimes(HoraIn, minutosIn);
 
                     HoraFin = Integer.parseInt(separada.next());
                     minutosFin = Integer.parseInt(separada.next());
-                    horaFin = util.integersToTimes(HoraFin, minutosFin);
+                    horaFinR = util.integersToTimes(HoraFin, minutosFin);
 
                     nombreRut = separada.next();
                     numRut = Integer.parseInt(separada.next());
@@ -199,16 +195,19 @@ public class manejadorArchivos {
                     ciclico = Boolean.parseBoolean(separada.next());
                     busesDispo = Integer.parseInt(separada.next());
 
-                    rut = new Ruta (horaInicio, horaFin, nombreRut, numRut, ciclico, busesDispo);
+                    rut = new Ruta(horaInicioR, horaFinR, nombreRut, numRut, ciclico, busesDispo);
                     System.out.println(rut);
                 }
 
-                cadena=fa.readLine();
+                cadena = fa.readLine();
+//                if (t != null && rut != null)
+//                    perso.crearRuta(t.getConductor(), t.getHoraInicio(), t.getHoraFin(), rut.getInicio(), rut.getFin(), rut.getNombre(), rut.getNumRuta(), rut.isCiclico(), rut.getBusesDisponibles());
+
             }
         } catch (FileNotFoundException e) {
-            System.out.println("El archivo al que se refiere no fue encontrado: "+e);
+            System.out.println("El archivo al que se refiere no fue encontrado: " + e );
         } catch (Exception e) {
-            System.out.println("Ha ocurrido un error:"+e);
+            System.out.println("Ha ocurrido un error:" + e );
         }
     }
 }

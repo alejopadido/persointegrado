@@ -16,9 +16,10 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         // Cargar datos previamente guardados al iniciar la aplicación
         PersoIntegrado perso = PersoIntegrado.getInstance();
-        perso.cargarContratoTXT();
-        perso.cargarContratoJSON();
-        perso.cargarContratoCSV();
+        //perso.cargarContratoTXT();
+        //perso.cargarContratoJSON();
+        //perso.cargarContratoCSV();
+        perso.leerRutas();
 
         // Cargar la pantalla principal
         Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("login0.fxml"));

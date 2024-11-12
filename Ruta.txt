@@ -1,7 +1,16 @@
 #Turno
 #Conductor - Hora inicio - Hora Final
 Juan, 07, 00, 12, 00
-#Rutaa
-#Hora inicio - Hora Final - Nombre de la Ruta, Numero de la Ruta, Ciclico, BusesDispo
+#Ruta
 07, 00, 11, 00, Galerias, 97, true, 2
+#Turno
+#Conductor - Hora inicio - Hora Final
+Juan, 07, 00, 12, 00
+#Ruta
+06, 00, 10, 00, Portal Norte, 12, true, 2
+#Turno
+#Conductor - Hora inicio - Hora Final
+Pedro, 08, 00, 10, 00
+#Ruta
+07, 30, 11, 30, Portal Norte, 12, true, 2
 #FIN

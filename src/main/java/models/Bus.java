@@ -127,12 +127,19 @@ public class Bus implements Serializable {
      **/
     public String PagosXBus(){
         double pago = 0;
+        String nom = null;
         for(Turno t : turnos){
-            if(t != null)
+            if(t != null) {
                 pago += t.calcularPago();
+                nom = t.getConductor();
+            }
         }
-        return "Conductor: " + turnos.get(1).getConductor() + " - pago: " + pago + "\n";
+        if(nom != null)
+            return "Conductor: " + nom + " - pago: " + pago + "\n";
+
+        return "Conductor: " + "pepito" + " - pago: " + pago + "\n";
     }
+
 
 
     @Override

@@ -12,6 +12,63 @@ public class Ruta implements Serializable {
 
     private String nombre;
     private int numRuta;
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getNumRuta() {
+        return numRuta;
+    }
+
+    public void setNumRuta(int numRuta) {
+        this.numRuta = numRuta;
+    }
+
+    public boolean isCiclico() {
+        return ciclico;
+    }
+
+    public void setCiclico(boolean ciclico) {
+        this.ciclico = ciclico;
+    }
+
+    public int getBusesDisponibles() {
+        return busesDisponibles;
+    }
+
+    public void setBusesDisponibles(int busesDisponibles) {
+        this.busesDisponibles = busesDisponibles;
+    }
+
+    public LocalTime getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(LocalTime horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public LocalTime getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(LocalTime horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public List<Bus> getBuses() {
+        return buses;
+    }
+
+    public void setBuses(List<Bus> buses) {
+        this.buses = buses;
+    }
+
+    public void setParaderos(List<Paradero> paraderos) {
+        this.paraderos = paraderos;
+    }
+
     private boolean ciclico;
     private int busesDisponibles;
     private LocalTime horaInicio;
@@ -65,6 +122,7 @@ public class Ruta implements Serializable {
         return paraderos;
     }
 
+
     /** PagosXRuta:
      * Descripcion: Genera un resumen de los pagos realizados por los autobuses en una ruta específica.
      * Este método recorre todos los autobuses asociados a la ruta y obtiene los detalles
@@ -79,7 +137,7 @@ public class Ruta implements Serializable {
                 pagosXBus.add(b.PagosXBus());
 
         return "Pagos para la Ruta " + nombre + '\'' + numRuta +
-                "{ " + pagosXBus +" } \n";
+                "{ " + pagosXBus + " } \n";
     }
 
     public boolean tieneParadero(String nombreParadero) {
