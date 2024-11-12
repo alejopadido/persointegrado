@@ -14,12 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import models.Bus;
-import models.PersoIntegrado;
-import models.Ruta;
-import models.TarjetaManager;
+import models.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -105,9 +104,20 @@ public class ControladorPasaje {
         String nombreRutaSeleccionada = rutasComboBox.getValue();
         Bus busSeleccionado = busesComboBox.getValue();
         String tipoUsuario = tipoUsuarioComboBox.getValue();
+        Tarjeta tarjetaSelecc = tarjetaManager.obtenerTarjetaConID(Integer.parseInt(tarjetaField.getText()));
 
         if (nombreRutaSeleccionada == null) {
             showAlert("Error", "Por favor seleccione una ruta.");
+            return;
+        }
+
+        // Retrieve the selected Ruta object
+        Optional<Ruta> rutaSeleccionada = persoIntegrado.getRutas().stream()
+                .filter(ruta -> ruta.getNombre().equals(nombreRutaSeleccionada))
+                .findFirst();
+
+        if (rutaSeleccionada.isEmpty()) {
+            showAlert("Error", "Ruta no encontrada.");
             return;
         }
 
@@ -121,18 +131,44 @@ public class ControladorPasaje {
             return;
         }
 
+        if (tarjetaSelecc == null){
+            showAlert("Error", "Tarjeta no encontrada");
+            return;
+        }
+
+        double monto = calcularMonto();
+        String horaText = horaField.getText();
+        // Parse the time from the user's input
+        LocalTime hora = LocalTime.parse(horaText, DateTimeFormatter.ofPattern("HH:mm"));
+
+        // Get the current date from the system
+        LocalDate currentDate = LocalDate.now();
+
+        // Combine the current date with the parsed time
+        LocalDateTime fechaHora = LocalDateTime.of(currentDate, hora);
+
+        if ((tarjetaSelecc.getSaldo() - monto) < 0) {
+            showAlert("Warning", "Saldo Insuficiente");
+            return;
+        } else {
+            // Pass the actual Ruta object instead of just its name
+            TransaccionPasaje trans = new TransaccionPasaje(monto, busSeleccionado, rutaSeleccionada.get(), fechaHora);
+            tarjetaSelecc.realizarTransaccion(trans);
+        }
+
         showAlert("Pago Exitoso", "El pasaje ha sido cobrado con éxito en la ruta " + nombreRutaSeleccionada +
                 " usando el bus " + busSeleccionado.getId() + " para un usuario de tipo " + tipoUsuario);
     }
 
-    private void calcularMonto() {
+
+    private double calcularMonto() {
         String tipoUsuario = tipoUsuarioComboBox.getValue();
         String horaText = horaField.getText();
 
         if (tipoUsuario == null || horaText.isEmpty()) {
             montoLabel.setText("Seleccione tipo de usuario y hora");
             montoLabel.setStyle("-fx-text-fill: #ff9900;");
-            return;
+            return 0;
         }
 
         try {
@@ -144,16 +180,18 @@ public class ControladorPasaje {
                     hora.isAfter(LocalTime.of(19, 30)));
 
             // Usar TarjetaManager para obtener la tarifa según el tipo de usuario y si es hora valle
-            int monto = tarjetaManager.getTarifa(tipoUsuario);
-            if (esHoraValle){
+            double monto = tarjetaManager.getTarifa(tipoUsuario);
+            if (esHoraValle && tipoUsuario.equalsIgnoreCase("Corriente")){
                 monto -= 300;
             }
             montoLabel.setText("$" + monto);
             montoLabel.setStyle("-fx-text-fill: #02ff24;");
+            return monto;
         } catch (DateTimeParseException e) {
             montoLabel.setText("Hora inválida");
             montoLabel.setStyle("-fx-text-fill: red;");
         }
+        return 0;
     }
 
 

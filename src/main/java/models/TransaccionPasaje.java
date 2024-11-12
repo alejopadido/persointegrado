@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class TransaccionPasaje {
+public class TransaccionPasaje implements Serializable {
     private double monto;
     private Bus bus;
     private Ruta ruta;
@@ -17,5 +18,15 @@ public class TransaccionPasaje {
 
     public double getMonto() {
         return monto;
+    }
+
+    @Override
+    public String toString() {
+        return "TransaccionPasaje{" +
+                "monto=" + monto +
+                ", busPlaca=" + bus.getPlaca() +
+                ", rutaNombre=" + ruta.getNombre() +
+                ", fechaHora=" + fechaHora +
+                '}';
     }
 }

@@ -17,6 +17,8 @@ import models.TarjetaException;
 import models.TarjetaManager;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorCrearTarjeta {
     @FXML
@@ -32,28 +34,39 @@ public class ControladorCrearTarjeta {
 
     // Método para crear tarjeta
     @FXML
-    private void crearTarjeta() throws TarjetaException {
+    private void crearTarjeta() {
+        System.out.println("Creando tarjeta ...");
 
-        System.out.println("ASJHFASKILDJASDASJKLDSA");
-        int IDAsignado = 1;
+        // Obtiene el ID asignado como el siguiente número después del tamaño de la lista
+        int IDAsignado = tarjetaManager.getTarjetas().size() + 1;
 
-        for (Tarjeta tar: tarjetaManager.getTarjetas()) {
-            if (tar.getId() == IDAsignado) {
-                throw new TarjetaException("Tarjeta ya existente", Alert.AlertType.WARNING);
-            }else{
+        // Verifica si ya existe una tarjeta con el ID asignado
+        boolean tarjetaExistente = tarjetaManager.getTarjetas().stream()
+                .anyMatch(tarjeta -> tarjeta.getId() == IDAsignado);
 
-            }
+        if (tarjetaExistente) {
+            showAlert("Tarjeta", "Tarjeta ya existente", Alert.AlertType.WARNING);
+            return;
         }
 
-        String montoInicialText = montoInicialField.getText();
-        Tarjeta nuevaTarjeta = new Tarjeta(1, Integer.parseInt(montoInicialText));
-        tarjetaManager.addTarjeta(nuevaTarjeta);
-        PersoIntegrado.imprimirTarjetasCargadas();
-        PersoIntegrado.saveData();
-        showAlert("Tarjeta", "Tarjeta creada exitosamente con saldo: " + montoInicialText + " con ID: " + IDAsignado, Alert.AlertType.INFORMATION);
+        try {
+            // Obtiene el monto inicial ingresado
+            String montoInicialText = montoInicialField.getText();
+            int montoInicial = Integer.parseInt(montoInicialText);
 
+            // Crea y agrega la nueva tarjeta
+            Tarjeta nuevaTarjeta = new Tarjeta(IDAsignado, montoInicial);
+            tarjetaManager.addTarjeta(nuevaTarjeta);
 
+            // Imprime las tarjetas cargadas y guarda los datos
+            PersoIntegrado.imprimirTarjetasCargadas();
+            PersoIntegrado.saveData();
 
+            // Muestra confirmación
+            showAlert("Tarjeta", "Tarjeta creada exitosamente con saldo: " + montoInicialText + " e ID: " + IDAsignado, Alert.AlertType.INFORMATION);
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Por favor ingrese un monto inicial válido.", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML

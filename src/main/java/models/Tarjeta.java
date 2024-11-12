@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tarjeta implements Serializable {
-    private Integer id;
+    private int id;
     private double saldo;
     private List<TransaccionPasaje> transacciones;
 
-    public Tarjeta(Integer id, double saldoInicial) {
+    public Tarjeta(int id, double saldoInicial) {
         this.id = id;
         this.saldo = saldoInicial;
         this.transacciones = new ArrayList<>();
@@ -17,6 +17,14 @@ public class Tarjeta implements Serializable {
 
     public double getSaldo() {
         return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public void setTransacciones(List<TransaccionPasaje> transacciones) {
+        this.transacciones = transacciones;
     }
 
     public void realizarTransaccion(TransaccionPasaje transaccion) {
@@ -28,7 +36,16 @@ public class Tarjeta implements Serializable {
         }
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Tarjeta{" +
+                "id=" + id +
+                ", saldo=" + saldo +
+                ", transacciones=" + transacciones +
+                '}';
     }
 }

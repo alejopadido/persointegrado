@@ -110,7 +110,8 @@ public class PersoIntegrado implements Serializable {
             } else {
                 System.out.println("Tarjetas registradas:");
                 for (Tarjeta tarjeta : tarjetas) {
-                    System.out.println("ID: " + tarjeta.getId() + ", Saldo: $" + tarjeta.getSaldo());
+                   // System.out.println("ID: " + tarjeta.getId() + ", Saldo: $" + tarjeta.getSaldo());
+                    System.out.println(tarjeta);
                 }
             }
         }

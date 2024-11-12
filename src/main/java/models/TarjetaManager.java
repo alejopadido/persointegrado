@@ -46,6 +46,15 @@ public class TarjetaManager implements Serializable {
         this.tarjetas.add(tarjeta);
     }
 
+    public Tarjeta obtenerTarjetaConID(int id) {
+        for (Tarjeta tarjeta : instance.tarjetas) {
+            if (tarjeta.getId() == id) {
+                return tarjeta;
+            }
+        }
+        return null;
+    }
+
     // Método para obtener la lista de tarjetas
     public List<Tarjeta> getTarjetas() {
         return this.tarjetas;
