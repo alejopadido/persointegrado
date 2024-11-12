@@ -15,14 +15,21 @@ public class PersoIntegrado implements Serializable {
     private static PersoIntegrado instance;
     List<EmpresaProveedora> empresas;
     List<Ruta> rutas;
+    protected List<Tarjeta> tarjetas;
     private int max;
     private transient ParaderoManager paraderoManager;
+    private transient TarjetaManager tarjetaManager;
 
     public PersoIntegrado() {
         empresas = new ArrayList<EmpresaProveedora>();
         rutas = new ArrayList<Ruta>();
         paraderoManager = ParaderoManager.getInstance();
+        tarjetaManager = TarjetaManager.getInstance();
+        tarjetas = new ArrayList<Tarjeta>();
+    }
 
+    public static void actualizarListaTarjetas(){
+        instance.tarjetas = instance.tarjetaManager.getTarjetas();
     }
 
     /**
@@ -42,6 +49,7 @@ public class PersoIntegrado implements Serializable {
                 instance.initializeTransientFields();
                 System.out.println("Datos cargados exitosamente.");
                 imprimirRutasCargadas();
+                imprimirTarjetasCargadas();
             }
         }
         return instance;
@@ -52,6 +60,10 @@ public class PersoIntegrado implements Serializable {
             paraderoManager = ParaderoManager.getInstance();
         }
 
+        if (tarjetaManager == null) {
+            tarjetaManager = TarjetaManager.getInstance();
+        }
+
         // Sincronizar todos los paraderos de las rutas con el ParaderoManager
         for (Ruta ruta : rutas) {
             System.out.println("A continuacion los paraderos de la ruta:" + ruta.getParaderos());
@@ -59,14 +71,25 @@ public class PersoIntegrado implements Serializable {
                 paraderoManager.obtenerParadero(paradero.getNombre(), paradero.getDireccion(), paradero.getHoraDeLlegada().getHora());
             }
         }
+
+        if (instance.tarjetas != null){
+            tarjetaManager.setTarjetas(instance.tarjetas);
+        }
     }
 
-    // Metodo para obtener el ParaderoManager
+    // Método para obtener el ParaderoManager
     public ParaderoManager getParaderoManager() {
         if (paraderoManager == null) {
             paraderoManager = ParaderoManager.getInstance();
         }
         return paraderoManager;
+    }
+
+    public TarjetaManager getTarjetaManager() {
+        if (tarjetaManager == null) {
+            tarjetaManager = TarjetaManager.getInstance();
+        }
+        return tarjetaManager;
     }
 
     // Método para imprimir las rutas que se han cargado
@@ -79,6 +102,22 @@ public class PersoIntegrado implements Serializable {
         } else {
             System.out.println("No se han encontrado rutas guardadas.");
         }
+    }
+
+    public static void imprimirTarjetasCargadas() {
+        if (instance != null){
+            List<Tarjeta> tarjetas = instance.getTarjetaManager().getTarjetas();
+            if (tarjetas.isEmpty()) {
+                System.out.println("No hay tarjetas registradas.");
+            } else {
+                System.out.println("Tarjetas registradas:");
+                for (Tarjeta tarjeta : tarjetas) {
+                   // System.out.println("ID: " + tarjeta.getId() + ", Saldo: $" + tarjeta.getSaldo());
+                    System.out.println(tarjeta);
+                }
+            }
+        }
+
     }
 
 
@@ -287,6 +326,7 @@ public class PersoIntegrado implements Serializable {
     public List<EmpresaProveedora> getEmpresas() {
         return empresas;
     }
+
     public List<Ruta> getRutas(){
         return rutas;
     }
