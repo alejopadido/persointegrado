@@ -45,7 +45,6 @@ dependencies {
     implementation 'javax.activation:javax.activation-api:1.2.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
     implementation 'com.opencsv:opencsv:5.5.2'
-    implementation 'com.sun.activation:javax.activation:1.2.0'
 
 }
 

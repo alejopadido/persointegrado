@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.control.Button?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="backgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorMenuAdministrador">
    <children>
       <ImageView fitHeight="67.0" fitWidth="36.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -89,5 +90,7 @@
             <Font size="22.0" />
          </font>
       </Text>
+      <!-- Botón para volver al menú de usuario -->
+      <Button layoutX="846.0" layoutY="550.0" onAction="#volverAlMenu" style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-size: 18px;" text="Volver al Login" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7" />
    </children>
 </AnchorPane>

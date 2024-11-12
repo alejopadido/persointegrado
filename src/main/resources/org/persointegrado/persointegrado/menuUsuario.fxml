@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -59,5 +60,10 @@
             <Font size="29.0" />
          </font>
       </Text>
+
+      <!-- Botón para volver al menú de usuario -->
+      <Button layoutX="846.0" layoutY="550.0" onAction="#volverAlMenu" style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-size: 18px;" text="Volver al Login" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7" />
    </children>
+
+
 </AnchorPane>
