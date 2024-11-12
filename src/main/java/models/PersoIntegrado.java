@@ -84,9 +84,7 @@ public class PersoIntegrado implements Serializable {
 
     // Método para guardar los datos en un archivo
     public static void saveData() {
-        manejadorArchivos.leerArchivoContratos("contratos.txt");
-        manejadorArchivos.leerContratoJson("contratos.json");
-        manejadorArchivos.leerContratoCsv("contratos.csv");
+        manejadorArchivos.lecturaArchivoRutas();
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("persoIntegradoData.ser"))) {
             oos.writeObject(instance);
             System.out.println("Datos guardados exitosamente.");
@@ -97,6 +95,7 @@ public class PersoIntegrado implements Serializable {
 
     // Método para cargar los datos desde un archivo
     public static PersoIntegrado loadData() {
+
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("persoIntegradoData.ser"))) {
             return (PersoIntegrado) ois.readObject();
         } catch (FileNotFoundException e) {
@@ -105,6 +104,18 @@ public class PersoIntegrado implements Serializable {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void cargarContratoTXT(){
+        utils.manejadorArchivos.leerArchivoContratos("contratos.txt");
+    }
+
+    public void cargarContratoJSON(){
+        utils.manejadorArchivos.leerContratoJson("contratos.json");
+    }
+
+    public void cargarContratoCSV(){
+        utils.manejadorArchivos.leerContratoCsv("contratos.csv");
     }
 
     public void guardarNumeroMax(int max){

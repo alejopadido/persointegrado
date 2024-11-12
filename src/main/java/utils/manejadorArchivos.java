@@ -10,10 +10,10 @@ import com.opencsv.exceptions.CsvException;
 import models.*;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalTime;
+import java.util.*;
 
 public class manejadorArchivos {
     static PersoIntegrado perso = PersoIntegrado.getInstance();
@@ -72,15 +72,14 @@ public class manejadorArchivos {
 
         try {
             // Leer el archivo JSON y convertirlo en una lista de objetos EmpresaProveedora
-            List<EmpresaProveedora> empresas = objectMapper.readValue(
-                    new File(nombre), new TypeReference<List<EmpresaProveedora>>() {}
-            );
+            String jsonContent = new String(Files.readAllBytes(Paths.get(nombre)));
+            List<EmpresaProveedora> empresas = objectMapper.readValue(jsonContent, objectMapper.getTypeFactory().constructCollectionType(List.class, EmpresaProveedora.class));
 
             // Imprimir los datos leídos en la consola
             for (EmpresaProveedora empresa : empresas) {
                 System.out.println("Nombre: " + empresa.getNombre());
                 System.out.println("NIT: " + empresa.getNit());
-                System.out.println("Contrato: " + (empresa.getContrato() != null ? "Presente" : "No presente"));
+                System.out.println("Contrato: " + (empresa.getContrato()));
                 System.out.println("Buses:");
                 perso.crearEmpresa(empresa);
                 for (Bus bus : empresa.getBuses()) {
@@ -140,6 +139,76 @@ public class manejadorArchivos {
 
         }catch (IOException | CsvException | ContratoProveedorException | EmpresaProveedoraException | PersoIntegradoException | BusException e) {
             e.printStackTrace();
+        }
+    }
+
+
+    public static void lecturaArchivoRutas(){
+        String cadena, nombreConductor, nombreRut;
+        int numRut, busesDispo, HoraIn, minutosIn, HoraFin, minutosFin;
+        LocalTime horaInicio, horaFin;
+        boolean ciclico;
+        Turno t;
+        Ruta rut;
+
+
+        try {
+            InputStreamReader input=new InputStreamReader(new FileInputStream("D:\\ISIST\\persointegrado\\Ruta.txt"));
+            BufferedReader fa=new BufferedReader(input);
+            cadena=fa.readLine();
+            while(!cadena.equalsIgnoreCase("#FIN"))
+            {
+                if(cadena.equalsIgnoreCase("#Turno"))
+                {
+                    fa.readLine(); //Para saltarse la fila de títulos
+                    cadena = fa.readLine(); //Lee siguiente línea para obtener el nombre del código
+                    Scanner separada = new Scanner(cadena).useDelimiter(", ");
+
+                    nombreConductor = separada.next();
+                    HoraIn = Integer.parseInt(separada.next());
+                    minutosIn = Integer.parseInt(separada.next());
+                    //Convertir de entero a LocalTime
+                    horaInicio = util.integersToTimes(HoraIn, minutosIn);
+
+                    HoraFin = Integer.parseInt(separada.next());
+                    minutosFin = Integer.parseInt(separada.next());
+                    horaFin = util.integersToTimes(HoraFin, minutosFin);
+
+                    t = new Turno(horaInicio, horaFin, nombreConductor);
+                    System.out.println(t);
+
+                    cadena = fa.readLine();
+                }
+                else if (cadena.equalsIgnoreCase("#Turno"))
+                {
+                    cadena = fa.readLine();
+
+                    Scanner separada = new Scanner(cadena).useDelimiter(", ");
+                    HoraIn = Integer.parseInt(separada.next());
+                    minutosIn = Integer.parseInt(separada.next());
+                    //Convertir de entero a LocalTime
+                    horaInicio = util.integersToTimes(HoraIn, minutosIn);
+
+                    HoraFin = Integer.parseInt(separada.next());
+                    minutosFin = Integer.parseInt(separada.next());
+                    horaFin = util.integersToTimes(HoraFin, minutosFin);
+
+                    nombreRut = separada.next();
+                    numRut = Integer.parseInt(separada.next());
+
+                    ciclico = Boolean.parseBoolean(separada.next());
+                    busesDispo = Integer.parseInt(separada.next());
+
+                    rut = new Ruta (horaInicio, horaFin, nombreRut, numRut, ciclico, busesDispo);
+                    System.out.println(rut);
+                }
+
+                cadena=fa.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("El archivo al que se refiere no fue encontrado: "+e);
+        } catch (Exception e) {
+            System.out.println("Ha ocurrido un error:"+e);
         }
     }
 }
