@@ -82,15 +82,23 @@ public class EmpresaProveedora implements Serializable {
     }
 
 
-    public List<Bus> busesDisponibles(LocalTime inicio, LocalTime fin, String conductor) {
+    public List<Bus> busesDisponibles(LocalTime inicio, LocalTime fin, List<String> conductores) {
         List<Bus> ls = new ArrayList<>();
+        int conductorIndex = 0;
+
         for (Bus b : buses) {
-            if (b != null && b.busesDisponibles(inicio, fin, conductor)) {
-                ls.add(b);
+            if (b != null && conductorIndex < conductores.size()) {
+                // Intenta asignar un conductor específico a un bus específico
+                List<String> conductorUnico = List.of(conductores.get(conductorIndex));
+                if (b.busesDisponibles(inicio, fin, conductorUnico)) {
+                    ls.add(b);
+                    conductorIndex++; // Incrementa el índice para el siguiente conductor
+                }
             }
         }
         return ls;
     }
+
 
 
 
