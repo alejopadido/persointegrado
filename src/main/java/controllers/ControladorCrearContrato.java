@@ -79,7 +79,6 @@ public class ControladorCrearContrato {
                 contadorDeBuses++;
             }else{
                 persoIntegrado.imprimirEmpresas();
-                utils.sendEmail.enviarCorreo(persoIntegrado.getEmpresas().get(persoIntegrado.getEmpresas().size()-1));
                 Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("menuAdministrador.fxml"));
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 scene = new Scene(fxmlLoader);

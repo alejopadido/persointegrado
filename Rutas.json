@@ -1,0 +1,11 @@
+[
+  {
+    "nombre": "Galerias",
+    "numRuta": "97",
+    "ciclico": "true",
+    "busesDisponibles": "2",
+    "HoraInicio" : "07.00",
+    "HoraFin": "11.00",
+
+  }
+]

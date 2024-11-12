@@ -8,7 +8,8 @@
       {"placa": "def345", "modelo": "Y"},
       {"placa": "ghi567", "modelo": "Z"}
     ]
-  },
+  }
+,
   {
     "nombre": "RutasSol",
     "nit": "8765",
