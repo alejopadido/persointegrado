@@ -22,11 +22,11 @@ public class TransaccionPasaje implements Serializable {
 
     @Override
     public String toString() {
-        return "TransaccionPasaje{" +
+        return "\n TransaccionPasaje{" +
                 "monto=" + monto +
                 ", busPlaca=" + bus.getPlaca() +
                 ", rutaNombre=" + ruta.getNombre() +
                 ", fechaHora=" + fechaHora +
-                '}';
+                "}";
     }
 }

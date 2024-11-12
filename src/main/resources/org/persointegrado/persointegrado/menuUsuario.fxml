@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="backgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorMenuUsuario">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="backgroundColor" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorMenuUsuario">
    <children>
       <ImageView fitHeight="67.0" fitWidth="36.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,7 +20,7 @@
          <font>
             <Font size="29.0" />
          </font></Text>
-      <Text fill="WHITE" layoutX="419.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pagar pasaje">
+      <Text fill="WHITE" layoutX="419.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pagar pasaje">
          <font>
             <Font size="29.0" />
          </font></Text>
@@ -30,15 +29,25 @@
             <Image url="@../../../images/ConsultarRutas.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgConsultarUnaRuta" fitHeight="281.0" fitWidth="331.0" layoutX="634.0" layoutY="50.0" onMouseClicked="#onMouseClickedConsultarUnaRuta" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgConsultarUnaRuta" fitHeight="202.0" fitWidth="269.0" layoutX="669.0" layoutY="101.0" onMouseClicked="#onMouseClickedConsultarUnaRuta" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/ConsultarUnaRuta.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgPagarPasaje" fitHeight="204.0" fitWidth="301.0" layoutX="367.0" layoutY="300.0" onMouseClicked="#onMouseClickedPagarPasaje" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgPagarPasaje" fitHeight="170.0" fitWidth="226.0" layoutX="389.0" layoutY="117.0" onMouseClicked="#onMouseClickedPagarPasaje" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/PagarPasaje.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="imgConsultarTarjeta" fitHeight="170.0" fitWidth="180.0" layoutX="163.0" layoutY="369.0" onMouseClicked="#onMouseClickedConsultarTarjeta" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/ConsultarTarjeta.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="140.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Consultar Tarjeta">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

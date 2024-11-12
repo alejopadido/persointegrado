@@ -27,6 +27,10 @@ public class Tarjeta implements Serializable {
         this.transacciones = transacciones;
     }
 
+    public List<TransaccionPasaje> getTransacciones() {
+        return transacciones;
+    }
+
     public void realizarTransaccion(TransaccionPasaje transaccion) {
         if (saldo >= transaccion.getMonto()) {
             saldo -= transaccion.getMonto();
