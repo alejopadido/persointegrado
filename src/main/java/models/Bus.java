@@ -61,9 +61,10 @@ public class Bus implements Serializable {
 
 
 
-    public boolean busesDisponibles(LocalTime inicio, LocalTime fin, String conductor) {
-        if (verificarValidez(inicio, fin)) {
-            turnos.add(new Turno(inicio, fin, conductor)); // Añadir el nuevo turno si es válido
+    public boolean busesDisponibles(LocalTime inicio, LocalTime fin, List<String> conductores) {
+        if (verificarValidez(inicio, fin) && conductores.size() == 1) {
+            String conductor = conductores.get(0); // Obtén el único conductor de la lista
+            turnos.add(new Turno(inicio, fin, conductor)); // Añadir el nuevo turno con el conductor específico
             return true;
         }
         return false;

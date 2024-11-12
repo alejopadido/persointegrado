@@ -4,10 +4,24 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorReporteNomina">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControladorReporteNomina" style="-fx-background-color: #000000;">
    <children>
-      <TextArea fx:id="idReporte" layoutX="11.0" layoutY="14.0" prefHeight="332.0" prefWidth="576.0" />
-      <Button fx:id="idBGenerarReporte" layoutX="228.0" layoutY="355.0" mnemonicParsing="false" onAction="#onGenerarReporte" prefHeight="31.0" prefWidth="144.0" text="Generar reporte" />
+      <!-- Título de la pantalla -->
+      <Label text="Reporte de Nómina" layoutX="20.0" layoutY="20.0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;" />
+
+      <!-- Tabla de reporte -->
+      <TableView fx:id="tablaReporte" layoutX="20.0" layoutY="60.0" prefHeight="400.0" prefWidth="960.0" style="-fx-background-color: #1a1a1a; -fx-text-fill: white;">
+         <columns>
+            <TableColumn text="Bus ID" fx:id="colBusId" style="-fx-font-size: 16px; -fx-text-fill: black;" />
+            <TableColumn text="Nombre Conductor" fx:id="colNombreConductor" style="-fx-font-size: 16px; -fx-text-fill: black;" />
+            <TableColumn text="Pago" fx:id="colPago" style="-fx-font-size: 16px; -fx-text-fill: black;" />
+         </columns>
+      </TableView>
+
+      <!-- Botón para generar reporte CSV -->
+      <Button fx:id="idBGenerarReporte" layoutX="420.0" layoutY="500.0" mnemonicParsing="false" onAction="#onGenerarReporte" prefHeight="40.0" prefWidth="300.0" text="Generar Reporte CSV" style="-fx-background-color: #103fdc; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
+
+      <!-- Botón para volver al menú -->
+      <Button fx:id="volverButton" layoutX="20.0" layoutY="500.0" mnemonicParsing="false" onAction="#volverAlMenu" prefHeight="40.0" prefWidth="160.0" text="Volver al Menú" style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" />
    </children>
 </AnchorPane>

@@ -120,6 +120,23 @@ public class PersoIntegrado implements Serializable {
 
     }
 
+    // Metodo para obtener todos los turnos con sus pagos
+    public List<String[]> obtenerTurnosConPagos() {
+        List<String[]> reporte = new ArrayList<>();
+        for (Ruta ruta : rutas) {
+            for (Bus bus : ruta.getBuses()) {
+                for (Turno turno : bus.getTurnos()) {
+                    String busId = String.valueOf(bus.getId());  // ID del bus
+                    String nombreConductor = turno.getConductor();  // Nombre del conductor
+                    double pago = turno.calcularPago();  // Cálculo del pago
+                    reporte.add(new String[]{busId, nombreConductor, String.valueOf(pago)});
+                }
+            }
+        }
+        return reporte;
+    }
+
+
 
     // Método para guardar los datos en un archivo
     public static void saveData() {
@@ -214,7 +231,7 @@ public class PersoIntegrado implements Serializable {
     }
 
 
-    public void crearRuta(String conductor, LocalTime inicio, LocalTime fin, LocalTime inicioRuta, LocalTime finRuta, String nombre, int numeroDeRuta, boolean ciclico, int busesDisponibles) throws PersoIntegradoException {
+    public void crearRuta(List<String> conductores, LocalTime inicio, LocalTime fin, LocalTime inicioRuta, LocalTime finRuta, String nombre, int numeroDeRuta, boolean ciclico, int busesDisponibles) throws PersoIntegradoException {
 
         if (nombre.equalsIgnoreCase("") || numeroDeRuta <= 0 || busesDisponibles <= 0) {
             throw new PersoIntegradoException("No pueden existir nulos o menores a 0");
@@ -224,7 +241,7 @@ public class PersoIntegrado implements Serializable {
             System.out.println("Buses válidos: " + x);
             if (x >= busesDisponibles) {
                 System.out.println("Obteniendo buses disponibles...");
-                List<List<Bus>> buses = busesDisponibles(inicio, fin, conductor);
+                List<List<Bus>> buses = busesDisponibles(inicio, fin, conductores);
                 Ruta nuevaRuta = new Ruta(inicioRuta, finRuta, nombre, numeroDeRuta, ciclico, busesDisponibles);
                 rutas.add(nuevaRuta);
                 System.out.println("Añadiendo buses a la ruta...");
@@ -267,11 +284,11 @@ public class PersoIntegrado implements Serializable {
     }
 
 
-    public List<List<Bus>> busesDisponibles(LocalTime inicio, LocalTime fin, String conductor) {
+    public List<List<Bus>> busesDisponibles(LocalTime inicio, LocalTime fin, List<String> conductores) {
         List<List<Bus>> ls = new ArrayList<>();
         for (EmpresaProveedora e : empresas) {
             if (e != null) {
-                ls.add(e.busesDisponibles(inicio, fin, conductor));
+                ls.add(e.busesDisponibles(inicio, fin, conductores));
             }
         }
         return ls;

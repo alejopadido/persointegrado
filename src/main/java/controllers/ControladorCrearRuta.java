@@ -18,14 +18,17 @@ import utils.util;
 
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
 
 public class ControladorCrearRuta {
 
-    private  PersoIntegrado persoIntegrado;
+    private PersoIntegrado persoIntegrado;
     private Stage stage;
     private Scene scene;
     private int conta = 0;
     private int x;
+
     public ControladorCrearRuta() {
         this.persoIntegrado = PersoIntegrado.getInstance();
     }
@@ -96,19 +99,18 @@ public class ControladorCrearRuta {
     @FXML
     void onActionAñadirParada(ActionEvent event) throws IOException {
         x = persoIntegrado.recibirMax();
-        System.out.println(x);
-        String nomruta = persoIntegrado.getRutas().get(persoIntegrado.getRutas().size()-1).getNombre();
-        try{
-            LocalTime llegada = util.integersToTimes(Integer.parseInt(tfHoraLlegada.getText()),Integer.parseInt(tfMinutoLlegada.getText()));
-            persoIntegrado.añadirParada(nomruta,tfNombreParadero.getText(),tfDireccionParadero.getText(),llegada);
-            System.out.println("Se ha guardado el paradero: " + (conta+1));
+        String nomruta = persoIntegrado.getRutas().get(persoIntegrado.getRutas().size() - 1).getNombre();
+        try {
+            LocalTime llegada = util.integersToTimes(Integer.parseInt(tfHoraLlegada.getText()), Integer.parseInt(tfMinutoLlegada.getText()));
+            persoIntegrado.añadirParada(nomruta, tfNombreParadero.getText(), tfDireccionParadero.getText(), llegada);
+            System.out.println("Se ha guardado el paradero: " + (conta + 1));
             PersoIntegrado.saveData();
-            if(conta<x-1){
+            if (conta < x - 1) {
                 conta++;
-            }else{
+            } else {
                 persoIntegrado.imprimirRutas();
                 Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("menuAdministrador.fxml"));
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(fxmlLoader);
                 stage.setScene(scene);
                 stage.show();
@@ -120,25 +122,40 @@ public class ControladorCrearRuta {
 
     @FXML
     void onActionAñadirRuta(ActionEvent event) throws Exception {
-    try{
-        x = Integer.parseInt(tfNumeroParaderos.getText().trim());
-        persoIntegrado.guardarNumeroMax(x);
-        LocalTime inicioTurno = util.integersToTimes(Integer.parseInt(tfHoraInicioTurno.getText()), Integer.parseInt(tfMinutoInicioTurno.getText()));
-        LocalTime finTurno = util.integersToTimes(Integer.parseInt(tfHoraFinTurno.getText()), Integer.parseInt(tfMinutoFinTurno.getText()));
-        LocalTime inicioRuta = util.integersToTimes(Integer.parseInt(tfHoraInicioRuta.getText()), Integer.parseInt(tfMinutoInicioRuta.getText()));
-        LocalTime finRuta = util.integersToTimes(Integer.parseInt(tfHoraFinRuta.getText()), Integer.parseInt(tfMinutoFinRuta.getText()));
-        boolean state = cbCiclico.isSelected();
-        persoIntegrado.crearRuta(tfNombreConductor.getText(),inicioTurno,finTurno,inicioRuta,finRuta, tfNombre.getText(), Integer.parseInt(tfNumero.getText().trim()), state, Integer.parseInt(tfBusesDisponibles.getText().trim()));
-        PersoIntegrado.saveData();
-        Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("añadirParaderos.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(fxmlLoader);
-        stage.setScene(scene);
-        stage.show();
-    } catch (NumberFormatException | PersoIntegradoException | IOException e) {
-        throw new Exception(e);
-    }
+        try {
+            x = Integer.parseInt(tfNumeroParaderos.getText().trim());
+            persoIntegrado.guardarNumeroMax(x);
 
-    }
+            // Parse start and end times for the route and shifts
+            LocalTime inicioTurno = util.integersToTimes(Integer.parseInt(tfHoraInicioTurno.getText()), Integer.parseInt(tfMinutoInicioTurno.getText()));
+            LocalTime finTurno = util.integersToTimes(Integer.parseInt(tfHoraFinTurno.getText()), Integer.parseInt(tfMinutoFinTurno.getText()));
+            LocalTime inicioRuta = util.integersToTimes(Integer.parseInt(tfHoraInicioRuta.getText()), Integer.parseInt(tfMinutoInicioRuta.getText()));
+            LocalTime finRuta = util.integersToTimes(Integer.parseInt(tfHoraFinRuta.getText()), Integer.parseInt(tfMinutoFinRuta.getText()));
 
+            boolean state = cbCiclico.isSelected();
+
+            // Get the list of conductor names and validate
+            List<String> conductores = Arrays.asList(tfNombreConductor.getText().split("\\s*,\\s*"));
+            int busesDisponibles = Integer.parseInt(tfBusesDisponibles.getText().trim());
+
+            // Check if the number of conductors matches the number of available buses
+            if (conductores.size() != busesDisponibles) {
+                tErrorBus.setText("El número de conductores no coincide con el número de buses disponibles.");
+                return;
+            }
+
+            // Crear ruta con la lista de conductores
+            persoIntegrado.crearRuta(conductores, inicioTurno, finTurno, inicioRuta, finRuta, tfNombre.getText(), Integer.parseInt(tfNumero.getText().trim()), state, busesDisponibles);
+            PersoIntegrado.saveData();
+
+            // Load the next screen
+            Parent fxmlLoader = FXMLLoader.load(MainApplication.class.getResource("añadirParaderos.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(fxmlLoader);
+            stage.setScene(scene);
+            stage.show();
+        } catch (NumberFormatException | PersoIntegradoException | IOException e) {
+            throw new Exception(e);
+        }
+    }
 }
