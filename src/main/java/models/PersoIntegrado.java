@@ -302,8 +302,6 @@ public class PersoIntegrado implements Serializable {
         }
     }
 
-
-
     public int idNuevoBus(){
         int x = 0;{
             for(EmpresaProveedora e: empresas){
@@ -331,6 +329,27 @@ public class PersoIntegrado implements Serializable {
         return rutas;
     }
 
+    public Bus getBusPorId(int id) {
+        for (Ruta ruta : rutas) {
+            if (ruta != null) {
+                for (Bus bus : ruta.getBuses()) {
+                    if (bus != null && bus.getId() == id) {
+                        return bus;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public EmpresaProveedora getEmpresaProveedoraByName(String name) {
+        for (EmpresaProveedora empresa : instance.empresas) {
+            if (empresa.getNombre().equals(name)) {
+                return empresa;
+            }
+        }
+        return null;
+    }
 
     /** pagosNominaConductores:
      * Descripcion: Genera un resumen de los pagos realizados por las rutas.

@@ -17,9 +17,11 @@ public class MainApplication extends Application {
         // Cargar datos previamente guardados al iniciar la aplicación
         PersoIntegrado perso = PersoIntegrado.getInstance();
 
-         perso.cargarContratoTXT();
+        /*
+        perso.cargarContratoTXT();
         perso.cargarContratoJSON();
         perso.cargarContratoCSV();
+         */
 
 
         // Cargar la pantalla principal

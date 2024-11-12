@@ -29,6 +29,10 @@ public class Bus implements Serializable {
 
     }
 
+    public String getempresaProveedora(){
+        return empresaProveedora;
+    }
+
     public Bus(Bus b){
         this.id = b.getId();
         this.placa = b.getPlaca();
@@ -47,6 +51,7 @@ public class Bus implements Serializable {
         this.estado = false;
         turnos = new ArrayList<>();
     }
+
 
     public boolean verificarValidez(LocalTime inicio, LocalTime fin) {
         for (Turno t : turnos) {
@@ -127,9 +132,11 @@ public class Bus implements Serializable {
      **/
     public String PagosXBus(){
         double pago = 0;
+        String resultado = "";
         for(Turno t : turnos){
             if(t != null)
                 pago += t.calcularPago();
+
         }
         return "Conductor: " + turnos.get(1).getConductor() + " - pago: " + pago + "\n";
     }
