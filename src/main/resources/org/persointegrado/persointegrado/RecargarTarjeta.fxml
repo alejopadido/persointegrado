@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane fx:controller="controllers.RecargarTarjetaController"
+          alignment="CENTER"
+          hgap="20" vgap="20"
+          style="-fx-background-color: #000000;" prefWidth="1000.0" prefHeight="600.0" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Title -->
+    <Label text="Recargar Tarjeta" textFill="white" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"
+           style="-fx-font-size: 32px; -fx-font-weight: bold;"/>
+
+    <!-- Tarjeta ID -->
+    <Label text="ID de la Tarjeta:" textFill="white" GridPane.rowIndex="1" GridPane.columnIndex="0"
+           style="-fx-font-size: 18px;"/>
+    <TextField fx:id="idTarjetaField" promptText="Ingrese el ID de la tarjeta" GridPane.rowIndex="1" GridPane.columnIndex="1"
+               style="-fx-background-color: #1a1a1a; -fx-text-fill: white; -fx-font-size: 16px;"/>
+
+    <!-- Monto Recarga -->
+    <Label text="Monto a Recargar:" textFill="white" GridPane.rowIndex="2" GridPane.columnIndex="0"
+           style="-fx-font-size: 18px;"/>
+    <TextField fx:id="montoRecargaField" promptText="Ingrese el monto de recarga" GridPane.rowIndex="2" GridPane.columnIndex="1"
+               style="-fx-background-color: #1a1a1a; -fx-text-fill: white; -fx-font-size: 16px;"/>
+
+    <!-- Botón Recargar -->
+    <Button text="Recargar" onAction="#recargarTarjeta" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"
+            style="-fx-background-color: #103fdc; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <!-- Botón Volver al Menú -->
+    <Button text="Volver al Menú" onAction="#volverAlMenu" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2"
+            style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+</GridPane>

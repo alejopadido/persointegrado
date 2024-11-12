@@ -49,5 +49,15 @@
             <Font size="29.0" />
          </font>
       </Text>
+      <ImageView fx:id="imgRecargarTarjeta" fitHeight="170.0" fitWidth="180.0" layoutX="440.0" layoutY="369.0" onMouseClicked="#onMouseClickedRecargarTarjeta" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/RecargarTarjeta.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="417.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recargar Tarjeta">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

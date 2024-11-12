@@ -52,7 +52,7 @@ public class ConsultarTarjetaController {
             if (tarjeta == null) {
                 showAlert("Error", "No se encontró una tarjeta con el ID proporcionado.", Alert.AlertType.ERROR);
             } else {
-                saldoLabel.setText("Saldo: $" + tarjeta.getSaldo());
+                saldoLabel.setText("$" + tarjeta.getSaldo());
                 cargarTransacciones(tarjeta);
             }
         } catch (NumberFormatException e) {

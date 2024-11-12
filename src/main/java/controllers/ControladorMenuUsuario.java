@@ -95,4 +95,24 @@ public class ControladorMenuUsuario {
             e.printStackTrace();
         }
     }
+
+
+
+    @FXML
+    void onMouseClickedRecargarTarjeta(MouseEvent event) {
+        try {
+            // Cargar la nueva pantalla "ConsultarRuta.fxml" desde la ubicación correcta
+            Parent consultarRutaParent = FXMLLoader.load(getClass().getResource("/org/persointegrado/persointegrado/RecargarTarjeta.fxml"));
+
+            // Obtener el Stage actual desde el evento
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Crear una nueva escena y configurarla en el stage
+            Scene scene = new Scene(consultarRutaParent);
+            window.setScene(scene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

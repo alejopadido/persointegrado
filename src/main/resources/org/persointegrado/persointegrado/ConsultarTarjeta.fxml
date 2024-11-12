@@ -35,7 +35,7 @@
     <!-- Mostrar el saldo de la tarjeta -->
     <Label text="Saldo:" textFill="white" GridPane.rowIndex="3" GridPane.columnIndex="0"
            style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-    <Label fx:id="saldoLabel" text="--" textFill="white" GridPane.rowIndex="3" GridPane.columnIndex="1"
+    <Label fx:id="saldoLabel" text="--" textFill="#18e13b" GridPane.rowIndex="3" GridPane.columnIndex="1"
            style="-fx-font-size: 18px;"/>
 
     <!-- Lista de transacciones -->
