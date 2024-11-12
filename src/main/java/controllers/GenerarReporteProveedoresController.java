@@ -34,13 +34,21 @@ public class GenerarReporteProveedoresController {
 
     @FXML
     private void generarReporte() {
-        List<String[]> datosCSV = ManejadorArchivos.leerArchivoCSVNomina("contratos.csv");
+        List<String[]> datosCSV = ManejadorArchivos.leerArchivoCSVNomina("reporte_nomina.csv");
         Map<String, EmpresaInfo> reporte = new HashMap<>();
 
         for (String[] fila : datosCSV) {
             String busID = fila[0];
             String nombreConductor = fila[1];
-            double pago = Double.parseDouble(fila[2]);
+            double pago;
+
+            // Attempt to parse the payment value and handle potential format errors
+            try {
+                pago = Double.parseDouble(fila[2]);
+            } catch (NumberFormatException e) {
+                System.err.println("Skipping row with invalid payment format: " + String.join(",", fila));
+                continue;
+            }
 
             Bus bus = persoIntegrado.getBusPorId(Integer.parseInt(busID));
             if (bus != null) {
@@ -48,11 +56,15 @@ public class GenerarReporteProveedoresController {
                 EmpresaProveedora empresa = persoIntegrado.getEmpresaProveedoraByName(empresaName);
                 ContratoProveedor contrato = empresa.getContrato();
 
-                EmpresaInfo empresaInfo = reporte.computeIfAbsent(empresa.getNombre(), k -> new EmpresaInfo(empresa.getNombre(), contrato.getContrato()));
+                EmpresaInfo empresaInfo = reporte.computeIfAbsent(
+                        empresa.getNombre(),
+                        k -> new EmpresaInfo(empresa.getNombre(), contrato.getContrato())
+                );
                 empresaInfo.sumarPagoBus(busID, pago);
             }
         }
 
+        // Build the report text
         StringBuilder reporteTexto = new StringBuilder();
         for (EmpresaInfo empresaInfo : reporte.values()) {
             reporteTexto.append("Empresa: ").append(empresaInfo.nombreEmpresa).append("\n");
@@ -60,7 +72,8 @@ public class GenerarReporteProveedoresController {
             reporteTexto.append("Total pagado: $").append(empresaInfo.getTotalPagado()).append("\n");
 
             for (Map.Entry<String, Double> busPago : empresaInfo.pagosPorBus.entrySet()) {
-                reporteTexto.append(" - Bus ID: ").append(busPago.getKey()).append(", Pago: $").append(busPago.getValue()).append("\n");
+                reporteTexto.append(" - Bus ID: ").append(busPago.getKey())
+                        .append(", Pago: $").append(busPago.getValue()).append("\n");
             }
 
             reporteTexto.append("\n");
@@ -68,6 +81,7 @@ public class GenerarReporteProveedoresController {
 
         reporteTextArea.setText(reporteTexto.toString());
     }
+
 
     private static class EmpresaInfo {
         private String nombreEmpresa;

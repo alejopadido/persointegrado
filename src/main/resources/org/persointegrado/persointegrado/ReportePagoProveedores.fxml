@@ -14,6 +14,9 @@
             <promptText>El reporte de pago a proveedores se generará aquí...</promptText>
         </TextArea>
 
+        <!-- Botón para generar el reporte -->
+        <Button layoutX="603.0" layoutY="551.0" onAction="#generarReporte" prefHeight="35.0" prefWidth="177.0" style="-fx-background-color: #007acc; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Generar Reporte" />
+
         <!-- Botón para volver al menú -->
         <Button layoutX="20.0" layoutY="551.0" onAction="#volverAlMenu" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #444444; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="Volver al Menú" />
     </children>
