@@ -211,4 +211,18 @@ public class manejadorArchivos {
             System.out.println("Ha ocurrido un error:"+e);
         }
     }
+
+    public List<String[]> leerArchivoCSVNomina(String rutaArchivo) {
+        List<String[]> datos = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] valores = linea.split(",");
+                datos.add(valores);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return datos;
+    }
 }

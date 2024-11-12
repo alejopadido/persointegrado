@@ -14,7 +14,7 @@ public class ContratoProveedor implements Serializable {
         }
     }
 
-    String getContrato() {
+    public String getContrato() {
         return contrato;
     }
 
